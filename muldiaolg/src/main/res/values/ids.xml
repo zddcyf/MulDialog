@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 自定义弹框的id -->
+    <item name="mTitleId" type="id" />
+    <item name="mSubmitLine" type="id" />
+    <item name="mContentId" type="id" />
+    <item name="mContentLine" type="id" />
+    <item name="mCancelId" type="id" />
+    <item name="mConfirmId" type="id" />
+    <item name="mCanAndConCenterLine" type="id" />
+    <item name="mListTop" type="id" />
+    <item name="mListBottom" type="id" />
+    <item name="mListImage" type="id" />
+    <item name="mListLine" type="id" />
+    <item name="mListCancel" type="id" />
+    <item name="mRecyclerView" type="id" />
+</resources>
