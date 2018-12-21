@@ -36,5 +36,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text2" />
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="类似于分享功能"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text3" />
 
 </android.support.constraint.ConstraintLayout>

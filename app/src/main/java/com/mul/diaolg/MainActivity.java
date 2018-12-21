@@ -16,6 +16,7 @@ import com.mul.dialog.click.list.IDialogListCancelClick;
 
 public class MainActivity extends AppCompatActivity {
     private MulDialog cmDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +95,49 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
+                break;
+            case R.id.text4:
+                new DialogListBuilder()
+                        .with(this)
+                        .setDialogEnum(DialogEnum.recy.getCode())
+                        .setColumns(4)
+                        .setDialogGrivate(DialogEnum.bottom.getCode())
+                        .setRecyclerViewBg(android.R.color.white)
+                        .setCancel("取消", 16, R.color.color_323232, true)
+                        .setCancelPadd(0, 0)
+                        .setCenterMargin(0, 0)
+                        .addData(new DialogListBean().setLineVisiable(false).setTop("微信好友", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
+                        .addData(new DialogListBean().setLineVisiable(false).setTop("朋友圈", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
+                        .addData(new DialogListBean().setLineVisiable(false).setTop("QQ好友", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
+                        .addData(new DialogListBean().setLineVisiable(false).setTop("新浪微博", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
+                        .addData(new DialogListBean().setLineVisiable(false).setTop("复制链接", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
+                        .addData(new DialogListBean().setLineVisiable(false).setTop("举报", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
+                        .setClick(new IDialogListCancelClick() {
+                            @Override
+                            public void cancelClick(View v) {
+
+                            }
+
+                            @Override
+                            public void btnClick(View v, int position) {
+                                String tag = (String) v.getTag();
+                                switch (tag) {
+                                    case "微信好友":
+                                        break;
+                                    case "朋友圈":
+                                        break;
+                                    case "QQ好友":
+                                        break;
+                                    case "新浪微博":
+                                        break;
+                                    case "复制链接":
+                                        break;
+                                    case "举报":
+                                        break;
+                                }
+                            }
+                        })
+                        .create();
                 break;
         }
     }

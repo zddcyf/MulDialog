@@ -105,7 +105,7 @@ public class MulDialog extends DialogFragment {
             mDefBuilder = (DialogDefBuilder) mBuilder;
             getDefaultView();
             setDefClick();
-        } else if (mBuilder.getDialogEnum() == DialogEnum.list.getCode() || mBuilder.getDialogEnum() == DialogEnum.list.getCode()) {
+        } else if (mBuilder.getDialogEnum() == DialogEnum.list.getCode() || mBuilder.getDialogEnum() == DialogEnum.recy.getCode()) {
             mListBuilder = (DialogListBuilder) mBuilder;
             getListView();
         } else {
