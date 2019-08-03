@@ -1,4 +1,4 @@
-package com.mul.dialog;
+package com.mul.dialog.dialog;
 
 import android.app.DialogFragment;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +21,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.mul.dialog.DialogEnum;
+import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.adapter.DialogAdapter;
 import com.mul.dialog.build.DialogBuilder;
 import com.mul.dialog.build.DialogDefBuilder;

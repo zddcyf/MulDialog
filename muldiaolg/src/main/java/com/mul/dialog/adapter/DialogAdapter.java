@@ -14,7 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mul.dialog.MulDialog;
+import com.mul.dialog.dialog.MulDialog;
 import com.mul.dialog.DialogEnum;
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.bean.DialogListBean;

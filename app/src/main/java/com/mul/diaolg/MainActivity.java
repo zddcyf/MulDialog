@@ -7,7 +7,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.mul.dialog.DialogEnum;
-import com.mul.dialog.MulDialog;
+import com.mul.dialog.dialog.MulDialog;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.build.DialogDefBuilder;
 import com.mul.dialog.build.DialogListBuilder;

@@ -2,7 +2,7 @@ package com.mul.dialog.build;
 
 import android.app.Activity;
 
-import com.mul.dialog.MulDialog;
+import com.mul.dialog.dialog.MulDialog;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.click.list.IDialogListClick;
 

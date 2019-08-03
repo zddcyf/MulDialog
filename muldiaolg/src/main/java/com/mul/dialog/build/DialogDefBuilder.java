@@ -3,7 +3,7 @@ package com.mul.dialog.build;
 import android.app.Activity;
 import android.view.Gravity;
 
-import com.mul.dialog.MulDialog;
+import com.mul.dialog.dialog.MulDialog;
 import com.mul.dialog.click.def.IDialogDefClick;
 import com.mul.dialog.muldiaolg.R;
 
