@@ -14,7 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mul.dialog.dialog.MulDialog;
+import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.DialogEnum;
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.bean.DialogListBean;
@@ -31,12 +31,12 @@ import com.mul.dialog.muldiaolg.R;
 public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHolder> {
 
     private final DialogListBuilder mListBuilder;
-    private final MulDialog cmDialog;
+    private final MulFragmentDialog cmDialog;
     private Context mContext;
 
     public static int CANCEL = 2;
 
-    public DialogAdapter(DialogListBuilder mListBuilder, MulDialog cmDialog) {
+    public DialogAdapter(DialogListBuilder mListBuilder, MulFragmentDialog cmDialog) {
         this.mListBuilder = mListBuilder;
         this.cmDialog = cmDialog;
     }

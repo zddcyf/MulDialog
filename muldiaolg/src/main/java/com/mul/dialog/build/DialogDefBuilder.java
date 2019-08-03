@@ -1,9 +1,11 @@
 package com.mul.dialog.build;
 
 import android.app.Activity;
+import android.app.Application;
+import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 
-import com.mul.dialog.dialog.MulDialog;
 import com.mul.dialog.click.def.IDialogDefClick;
 import com.mul.dialog.muldiaolg.R;
 
@@ -17,9 +19,9 @@ public class DialogDefBuilder extends DialogBuilder {
     private int centerLayBgImg = R.drawable.dialog_def_bg; // 针对内容布局背景用图片或者XML文件
     private float mLineWidth = 0.5f; // 线的宽度,像素值
     private int mLineColor = -1; // 线的颜色
-    private boolean isSubmitLine = false; // 是否显示提示下方的线
-    private boolean isContentLine = true; // 是否显示内容下方的线
-    private boolean isCanAndConCenterLine = true; // 是否显示确认取消中间的线
+    private boolean submitLine = false; // 是否显示提示下方的线
+    private boolean sontentLine = true; // 是否显示内容下方的线
+    private boolean canAndConCenterLine = true; // 是否显示确认取消中间的线
     private String mSubmit; // 提示文字
     private int mSubmitLeftPadd = 0, mSubmitTopPadd = 0, mSubmitRightPadd = 0, mSubmitBottomPadd = 0; // 提示文字距离上下左右的距离
     private int mSubmitSize = -1; // 提示文字大小
@@ -36,12 +38,42 @@ public class DialogDefBuilder extends DialogBuilder {
     private String mConfirmStr; // 确认的显示文字默认为确认
     private int mConfirmSize = -1; // 确认文字的大小
     private int mConfirmColor = -1; // 确认文字的颜色
-    private boolean isSubmitBold; // 是否对提示文字进行加粗处理
-    private boolean isContentBold; // 是否对内容文字进行加粗处理
-    private boolean isCanAndConBold; // 是否对确认取消文字进行加粗处理
+    private boolean submitBold; // 是否对提示文字进行加粗处理
+    private boolean contentBold; // 是否对内容文字进行加粗处理
+    private boolean canAndConBold; // 是否对确认取消文字进行加粗处理
     private IDialogDefClick iDialogDefClick;
 
+    private DialogDefBuilder(){}
+
+    public static DialogDefBuilder builder() {
+        return DialogDefBuilderHolder.DIALOG_BUILDER;
+    }
+
+    private static class DialogDefBuilderHolder {
+        private static final DialogDefBuilder DIALOG_BUILDER = new DialogDefBuilder();
+    }
+
     public DialogDefBuilder with(Activity mContext) {
+        super.with(mContext);
+        return this;
+    }
+
+    public DialogDefBuilder with(AppCompatActivity mContext) {
+        super.with(mContext);
+        return this;
+    }
+
+    public DialogDefBuilder with(Fragment mContext) {
+        super.with(mContext);
+        return this;
+    }
+
+    public DialogDefBuilder with(android.support.v4.app.Fragment mContext) {
+        super.with(mContext);
+        return this;
+    }
+
+    public DialogDefBuilder with(Application mContext) {
         super.with(mContext);
         return this;
     }
@@ -126,7 +158,7 @@ public class DialogDefBuilder extends DialogBuilder {
         this.mSubmit = mSubmit;
         this.mSubmitSize = mSubmitSize;
         this.mSubmitColor = mSubmitColor;
-        this.isSubmitBold = isSubmitBold;
+        this.submitBold = isSubmitBold;
         return this;
     }
 
@@ -155,7 +187,7 @@ public class DialogDefBuilder extends DialogBuilder {
         this.mContentStr = mContentStr;
         this.mContentSize = mContentSize;
         this.mContentColor = mContentColor;
-        this.isContentBold = isContentBold;
+        this.contentBold = isContentBold;
         return this;
     }
 
@@ -190,7 +222,7 @@ public class DialogDefBuilder extends DialogBuilder {
         this.mConfirmSize = mCanAndConSize;
         this.mCancelColor = mCanAndConColor;
         this.mConfirmColor = mCanAndConColor;
-        this.isCanAndConBold = isCanAndConBold;
+        this.canAndConBold = isCanAndConBold;
         return this;
     }
 
@@ -215,17 +247,17 @@ public class DialogDefBuilder extends DialogBuilder {
     }
 
     public DialogDefBuilder setSubmitLine(boolean submitLine) {
-        this.isSubmitLine = submitLine;
+        this.submitLine = submitLine;
         return this;
     }
 
-    public DialogDefBuilder setContentLine(boolean contentLine) {
-        this.isContentLine = contentLine;
+    public DialogDefBuilder setSontentLine(boolean sontentLine) {
+        this.sontentLine = sontentLine;
         return this;
     }
 
     public DialogDefBuilder setCanAndConCenterLine(boolean canAndConCenterLine) {
-        this.isCanAndConCenterLine = canAndConCenterLine;
+        this.canAndConCenterLine = canAndConCenterLine;
         return this;
     }
 
@@ -332,17 +364,17 @@ public class DialogDefBuilder extends DialogBuilder {
     }
 
     public DialogDefBuilder setSubmitBold(boolean isSubmitBold) {
-        this.isSubmitBold = isSubmitBold;
+        this.submitBold = isSubmitBold;
         return this;
     }
 
     public DialogDefBuilder setContentBold(boolean isContentBold) {
-        this.isContentBold = isContentBold;
+        this.contentBold = isContentBold;
         return this;
     }
 
     public DialogDefBuilder setCanAndConBold(boolean isCanAndConBold) {
-        this.isCanAndConBold = isCanAndConBold;
+        this.canAndConBold = isCanAndConBold;
         return this;
     }
 
@@ -392,15 +424,15 @@ public class DialogDefBuilder extends DialogBuilder {
     }
 
     public boolean isSubmitLine() {
-        return isSubmitLine;
+        return submitLine;
     }
 
-    public boolean isContentLine() {
-        return isContentLine;
+    public boolean isSontentLine() {
+        return sontentLine;
     }
 
     public boolean isCanAndConCenterLine() {
-        return isCanAndConCenterLine;
+        return canAndConCenterLine;
     }
 
     public String getmSubmit() {
@@ -560,15 +592,15 @@ public class DialogDefBuilder extends DialogBuilder {
     }
 
     public boolean isSubmitBold() {
-        return isSubmitBold;
+        return submitBold;
     }
 
     public boolean isContentBold() {
-        return isContentBold;
+        return contentBold;
     }
 
     public boolean isCanAndConBold() {
-        return isCanAndConBold;
+        return canAndConBold;
     }
 
     public IDialogDefClick getiDialogDefClick() {
@@ -577,12 +609,5 @@ public class DialogDefBuilder extends DialogBuilder {
 
     public void setiDialogDefClick(IDialogDefClick iDialogDefClick) {
         this.iDialogDefClick = iDialogDefClick;
-    }
-
-    public MulDialog create() {
-        MulDialog cmDialog = new MulDialog();
-        cmDialog.setBuilder(this);
-        cmDialog.show(getContext().getFragmentManager(), "弹框");
-        return cmDialog;
     }
 }

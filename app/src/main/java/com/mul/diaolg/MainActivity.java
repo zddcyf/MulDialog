@@ -7,7 +7,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.mul.dialog.DialogEnum;
-import com.mul.dialog.dialog.MulDialog;
+import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.build.DialogDefBuilder;
 import com.mul.dialog.build.DialogListBuilder;
@@ -15,7 +15,7 @@ import com.mul.dialog.click.def.IDialogDefAllClick;
 import com.mul.dialog.click.list.IDialogListCancelClick;
 
 public class MainActivity extends AppCompatActivity {
-    private MulDialog cmDialog;
+    private MulFragmentDialog cmDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.text1:
-                new DialogDefBuilder()
+                DialogDefBuilder.builder()
                         .with(this)
                         .setCenterMargin(50, 50)
                         .setContent("搜索正在加紧研发中")
@@ -47,11 +47,10 @@ public class MainActivity extends AppCompatActivity {
                             public void confirmClick(View v) {
 
                             }
-                        })
-                        .create();
+                        }).create();
                 break;
             case R.id.text2:
-                new DialogListBuilder()
+                DialogListBuilder.builder()
                         .with(this)
                         .setDialogEnum(DialogEnum.list.getCode())
                         .setDialogGrivate(DialogEnum.bottom.getCode())
@@ -70,17 +69,15 @@ public class MainActivity extends AppCompatActivity {
                             public void btnClick(View v, int position) {
 
                             }
-                        })
-                        .create();
+                        }).create();
                 break;
             case R.id.text3:
-                cmDialog = new DialogDefBuilder()
+                cmDialog = (MulFragmentDialog) DialogDefBuilder.builder()
                         .with(this)
                         .setDialogEnum(-1)
                         .setLayoutId(R.layout.ac_rel_dialog_surr)
-                        .setCenterMargin(50, 50)
-                        .create();
-                cmDialog.configCustView(new MulDialog.ConfigView() {
+                        .setCenterMargin(50, 50).create();
+                cmDialog.configCustView(new MulFragmentDialog.ConfigView() {
                     @Override
                     public void configCustView(View v) {
                         AppCompatTextView submit = v.findViewById(R.id.submit);
@@ -97,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
             case R.id.text4:
-                new DialogListBuilder()
+                DialogListBuilder.builder()
                         .with(this)
                         .setDialogEnum(DialogEnum.recy.getCode())
                         .setColumns(4)

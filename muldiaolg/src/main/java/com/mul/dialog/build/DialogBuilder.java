@@ -1,8 +1,14 @@
 package com.mul.dialog.build;
 
 import android.app.Activity;
+import android.app.Application;
+import android.app.Fragment;
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
 import com.mul.dialog.DialogEnum;
+import com.mul.dialog.dialog.MulDialog;
+import com.mul.dialog.dialog.MulFragmentDialog;
 
 /**
  * Created by zdd
@@ -11,7 +17,7 @@ import com.mul.dialog.DialogEnum;
  * summary:
  */
 public class DialogBuilder {
-    private Activity mContext; // 必填
+    private Context mContext; // 必填
     private int layoutId = -1; // 自定义的布局id
     private int bgColor = -1; // 针对整体布局颜色
     private int centerLayBg = -1; // 针对内容布局背景用图片或者XML文件
@@ -19,11 +25,31 @@ public class DialogBuilder {
     private int dialogEnum; // 设置弹出框的样式
     private int mCenterLeftMar, mCenterTopMar, mCenterRightMar, mCenterBottomMar;
 
-    public Activity getContext() {
+    public Context getContext() {
         return mContext;
     }
 
     public DialogBuilder with(Activity mContext) {
+        this.mContext = mContext;
+        return this;
+    }
+
+    public DialogBuilder with(AppCompatActivity mContext) {
+        this.mContext = mContext;
+        return this;
+    }
+
+    public DialogBuilder with(Fragment mContext) {
+        this.mContext = mContext.getActivity();
+        return this;
+    }
+
+    public DialogBuilder with(android.support.v4.app.Fragment mContext) {
+        this.mContext = mContext.getActivity();
+        return this;
+    }
+
+    public DialogBuilder with(Application mContext) {
         this.mContext = mContext;
         return this;
     }
@@ -121,5 +147,17 @@ public class DialogBuilder {
 
     public int getCenterBottomMar() {
         return mCenterBottomMar;
+    }
+
+    public MulDialog create() {
+        MulDialog mulDialog = null;
+        if (getContext() instanceof Application) {
+
+        } else {
+            mulDialog = new MulFragmentDialog();
+            mulDialog.setBuilder(this);
+            ((MulFragmentDialog) mulDialog).show(((Activity) getContext()).getFragmentManager(), "弹框");
+        }
+        return mulDialog;
     }
 }

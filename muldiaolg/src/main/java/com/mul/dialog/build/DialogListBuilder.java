@@ -1,10 +1,14 @@
 package com.mul.dialog.build;
 
 import android.app.Activity;
+import android.app.Application;
+import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
-import com.mul.dialog.dialog.MulDialog;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.click.list.IDialogListClick;
+import com.mul.dialog.dialog.MulDialog;
+import com.mul.dialog.dialog.MulFragmentDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +29,14 @@ public class DialogListBuilder extends DialogBuilder {
     private int topViewGroupBgCenter = -1;
     private int topViewGroupBgEnd = -1;
 
-    private boolean isBottomCanCel = true; // 是否有底部取消按钮
+    private boolean bottomCanCel = true; // 是否有底部取消按钮
 
     private int recyclerViewBg = -1; // 列表的整体背景
 
     /**
      * 底部线的颜色和高度以及是否展示
      */
-    private boolean isLine = true;
+    private boolean line = true;
     private float lineWidth = 0.5f;
     private int lineColor = -1;
 
@@ -52,12 +56,42 @@ public class DialogListBuilder extends DialogBuilder {
     /**
      * 设置item的高
      */
-    private boolean isSetHeight; // 是否设置item的高
+    private boolean setHeight; // 是否设置item的高
     private int height; // item的高度
     private int cancelHeight; // item的高度
     private IDialogListClick iDialogListClick;
 
+    private DialogListBuilder(){}
+
+    public static DialogListBuilder builder() {
+        return DialogListBuilderHolder.DIALOG_BUILDER;
+    }
+
+    private static class DialogListBuilderHolder {
+        private static final DialogListBuilder DIALOG_BUILDER = new DialogListBuilder();
+    }
+
     public DialogListBuilder with(Activity mContext) {
+        super.with(mContext);
+        return this;
+    }
+
+    public DialogListBuilder with(AppCompatActivity mContext) {
+        super.with(mContext);
+        return this;
+    }
+
+    public DialogListBuilder with(Fragment mContext) {
+        super.with(mContext);
+        return this;
+    }
+
+    public DialogListBuilder with(android.support.v4.app.Fragment mContext) {
+        super.with(mContext);
+        return this;
+    }
+
+    public DialogListBuilder with(Application mContext) {
         super.with(mContext);
         return this;
     }
@@ -220,7 +254,7 @@ public class DialogListBuilder extends DialogBuilder {
     }
 
     public boolean isBottomCanCel() {
-        return isBottomCanCel;
+        return bottomCanCel;
     }
 
     public int getCancelHeight() {
@@ -233,16 +267,16 @@ public class DialogListBuilder extends DialogBuilder {
     }
 
     public DialogListBuilder setBottomCanCel(boolean bottomCanCel) {
-        isBottomCanCel = bottomCanCel;
+        this.bottomCanCel = bottomCanCel;
         return this;
     }
 
     public boolean isSetHeight() {
-        return isSetHeight;
+        return setHeight;
     }
 
     public DialogListBuilder setSetHeight(boolean setHeight) {
-        isSetHeight = setHeight;
+        this.setHeight = setHeight;
         return this;
     }
 
@@ -313,11 +347,11 @@ public class DialogListBuilder extends DialogBuilder {
     }
 
     public boolean isLine() {
-        return isLine;
+        return line;
     }
 
     public DialogListBuilder setLine(boolean line) {
-        isLine = line;
+        this.line = line;
         return this;
     }
 
@@ -371,11 +405,5 @@ public class DialogListBuilder extends DialogBuilder {
 
     public boolean isCancelBold() {
         return cancelBold;
-    }
-
-    public void create() {
-        MulDialog cmDialog = new MulDialog();
-        cmDialog.setBuilder(this);
-        cmDialog.show(getContext().getFragmentManager(), "弹框");
     }
 }
