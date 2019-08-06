@@ -2,7 +2,6 @@ package com.mul.dialog.dialog;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 
 import com.mul.dialog.build.DialogBuilder;
 
