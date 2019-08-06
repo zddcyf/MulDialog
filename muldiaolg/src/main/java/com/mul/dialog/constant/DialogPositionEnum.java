@@ -6,7 +6,7 @@ package com.mul.dialog.constant;
  * @ClassName: DialogPositionEnum
  * @Author: zdd
  * @CreateDate: 2019/8/3 10:26
- * @Description: 类的作用描述
+ * @Description: 弹框所在位置
  * @UpdateUser: 更新者
  * @UpdateDate: 2019/8/3 10:26
  * @UpdateRemark: 更新说明

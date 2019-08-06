@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.click.list.IDialogListClick;
-import com.mul.dialog.dialog.MulDialog;
-import com.mul.dialog.dialog.MulFragmentDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,13 +109,13 @@ public class DialogListBuilder extends DialogBuilder {
         return this;
     }
 
-    public DialogListBuilder setDialogGrivate(int dialogGrivate) {
-        super.setDialogGrivate(dialogGrivate);
+    public DialogListBuilder setDialogPositionEnum(int dialogPositionEnum) {
+        super.setDialogPositionEnum(dialogPositionEnum);
         return this;
     }
 
-    public DialogListBuilder setDialogEnum(int dialogEnum) {
-        super.setDialogEnum(dialogEnum);
+    public DialogListBuilder setDialogStyleEnum(int dialogStyleEnum) {
+        super.setDialogStyleEnum(dialogStyleEnum);
         return this;
     }
 

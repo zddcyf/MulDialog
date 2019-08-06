@@ -21,7 +21,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
-import com.mul.dialog.DialogEnum;
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.adapter.DialogAdapter;
 import com.mul.dialog.build.DialogBuilder;
@@ -29,6 +28,8 @@ import com.mul.dialog.build.DialogDefBuilder;
 import com.mul.dialog.build.DialogListBuilder;
 import com.mul.dialog.click.def.IDialogDefAllClick;
 import com.mul.dialog.click.def.IDialogDefCancelClick;
+import com.mul.dialog.constant.DialogPositionEnum;
+import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.muldiaolg.R;
 
 /**
@@ -82,11 +83,11 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
             WindowManager.LayoutParams layoutParams = window.getAttributes();
 
 //            layoutParams.windowAnimations = R.style.MusicDialog;//动画
-            if (mBuilder.getDialogGrivate() == DialogEnum.top.getCode()) {
+            if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.top.getCode()) {
                 layoutParams.gravity = Gravity.TOP; // 位置
-            } else if (mBuilder.getDialogGrivate() == DialogEnum.center.getCode()) {
+            } else if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.center.getCode()) {
                 layoutParams.gravity = Gravity.CENTER; // 位置
-            } else if (mBuilder.getDialogGrivate() == DialogEnum.bottom.getCode()) {
+            } else if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.bottom.getCode()) {
                 layoutParams.gravity = Gravity.BOTTOM; // 位置
             } else {
                 layoutParams.gravity = Gravity.CENTER; // 位置
@@ -103,11 +104,11 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mBgConslay = new RelativeLayout(mBuilder.getContext());
         mContentConslay = new ConstraintLayout(mBuilder.getContext());
-        if (mBuilder.getDialogEnum() == DialogEnum.def.getCode()) {
+        if (mBuilder.getDialogStyleEnum() == DialogStyleEnum.def.getCode()) {
             mDefBuilder = (DialogDefBuilder) mBuilder;
             getDefaultView();
             setDefClick();
-        } else if (mBuilder.getDialogEnum() == DialogEnum.list.getCode() || mBuilder.getDialogEnum() == DialogEnum.recy.getCode()) {
+        } else if (mBuilder.getDialogStyleEnum() == DialogStyleEnum.list.getCode() || mBuilder.getDialogStyleEnum() == DialogStyleEnum.recy.getCode()) {
             mListBuilder = (DialogListBuilder) mBuilder;
             getListView();
         } else {
@@ -133,11 +134,11 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
          * 默认弹出框为中间时。中间的父布局
          */
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mContentConslay.getLayoutParams();
-        if (mBuilder.getDialogGrivate() == DialogEnum.top.getCode()) {
+        if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.top.getCode()) {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-        } else if (mBuilder.getDialogGrivate() == DialogEnum.center.getCode()) {
+        } else if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.center.getCode()) {
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        } else if (mBuilder.getDialogGrivate() == DialogEnum.bottom.getCode()) {
+        } else if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.bottom.getCode()) {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         } else {
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
@@ -264,10 +265,10 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         mTitle.setVisibility(TextUtils.isEmpty(mDefBuilder.getmSubmit()) ? View.GONE : View.VISIBLE);
         mSubmitLine.setVisibility(mDefBuilder.isSubmitLine() ? View.VISIBLE : View.GONE);
         mContentLine.setVisibility(mDefBuilder.isSontentLine() ? View.VISIBLE : View.GONE);
-        if (mDefBuilder.getBtnNumber() == DialogEnum.first.getCode()) {
+        if (mDefBuilder.getBtnNumber() == DialogStyleEnum.first.getCode()) {
             mCancel.setVisibility(View.GONE);
             mCanAndConCenterLine.setVisibility(View.GONE);
-        } else if (mDefBuilder.getBtnNumber() == DialogEnum.second.getCode()) {
+        } else if (mDefBuilder.getBtnNumber() == DialogStyleEnum.second.getCode()) {
             mCancel.setVisibility(View.VISIBLE);
             mCanAndConCenterLine.setVisibility(View.VISIBLE);
         }
@@ -282,7 +283,7 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
                 mContentConslay.setBackgroundColor(getResources().getColor(mBuilder.getCenterLayBg()));
             }
         } else {
-            if (mBuilder.getDialogEnum() == DialogEnum.def.getCode()) {
+            if (mBuilder.getDialogStyleEnum() == DialogStyleEnum.def.getCode()) {
                 mContentConslay.setBackground(getResources().getDrawable(R.drawable.dialog_def_bg));
             }
         }
@@ -393,9 +394,9 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         constraintSet.constrainWidth(mConfirm.getId(), 0);
         constraintSet.constrainHeight(mConfirm.getId(), ScreenUtils.px(43));
         setId(constraintSet, mConfirm.getId(), ConstraintSet.TOP, mContentLine.getId(), ConstraintSet.BOTTOM);
-        if (mDefBuilder.getBtnNumber() == DialogEnum.first.getCode()) {
+        if (mDefBuilder.getBtnNumber() == DialogStyleEnum.first.getCode()) {
             setId(constraintSet, mConfirm.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
-        } else if (mDefBuilder.getBtnNumber() == DialogEnum.second.getCode()) {
+        } else if (mDefBuilder.getBtnNumber() == DialogStyleEnum.second.getCode()) {
             setId(constraintSet, mConfirm.getId(), ConstraintSet.LEFT, mCanAndConCenterLine.getId(), ConstraintSet.RIGHT);
         }
         setId(constraintSet, mConfirm.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
@@ -415,10 +416,10 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
     private void getListView() {
         mRecyclerView = new RecyclerView(mBuilder.getContext());
         mRecyclerView.setId(R.id.mRecyclerView);
-        if (mListBuilder.getDialogEnum() == DialogEnum.list.getCode()) {
+        if (mListBuilder.getDialogStyleEnum() == DialogStyleEnum.list.getCode()) {
             // 类似于list列表形式的
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mBuilder.getContext()));
-        } else if (mListBuilder.getDialogEnum() == DialogEnum.recy.getCode()) {
+        } else if (mListBuilder.getDialogStyleEnum() == DialogStyleEnum.recy.getCode()) {
             // 类似于gridview形式的
             GridLayoutManager gridLayoutManager = new GridLayoutManager(mBuilder.getContext(), mListBuilder.getColumns());
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {

@@ -14,7 +14,7 @@ public class DialogListBean {
     private boolean topBold;
     private int topSize = -1;
     private int topColor = -1;
-    private int topGrivate = 10;
+    private int dialogListTopGrivate = 10;
     private int topPaddLeft, topPaddTop, topPaddRight, topPaddBottom;
 
     /**
@@ -74,19 +74,19 @@ public class DialogListBean {
         return this;
     }
 
-    public int getTopGrivate() {
-        return topGrivate;
+    public int getDialogListTopGrivate() {
+        return dialogListTopGrivate;
     }
 
-    public DialogListBean setTopGrivate(int topGrivate) {
-        this.topGrivate = topGrivate;
+    public DialogListBean setDialogListTopGrivate(int dialogListTopGrivate) {
+        this.dialogListTopGrivate = dialogListTopGrivate;
         return this;
     }
 
     public DialogListBean setTop(String topStr, boolean topBold, int topGrivate) {
         this.topStr = topStr;
         this.topBold = topBold;
-        this.topGrivate = topGrivate;
+        this.dialogListTopGrivate = topGrivate;
         return this;
     }
 
@@ -116,7 +116,7 @@ public class DialogListBean {
         this.topBold = topBold;
         this.topSize = topSize;
         this.topColor = topColor;
-        this.topGrivate = topGrivate;
+        this.dialogListTopGrivate = topGrivate;
         return this;
     }
 

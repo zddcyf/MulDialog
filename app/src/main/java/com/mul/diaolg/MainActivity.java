@@ -6,7 +6,8 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
-import com.mul.dialog.DialogEnum;
+import com.mul.dialog.constant.DialogPositionEnum;
+import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.build.DialogDefBuilder;
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.text2:
                 DialogListBuilder.builder()
                         .with(this)
-                        .setDialogEnum(DialogEnum.list.getCode())
-                        .setDialogGrivate(DialogEnum.bottom.getCode())
+                        .setDialogStyleEnum(DialogStyleEnum.list.getCode())
+                        .setDialogPositionEnum(DialogPositionEnum.bottom.getCode())
                         .setCenterMargin(50, 50)
                         .setCancel("取消", true)
                         .addData(new DialogListBean().setTop("男", true))
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.text3:
                 cmDialog = (MulFragmentDialog) DialogDefBuilder.builder()
                         .with(this)
-                        .setDialogEnum(-1)
+                        .setDialogStyleEnum(-1)
                         .setLayoutId(R.layout.ac_rel_dialog_surr)
                         .setCenterMargin(50, 50).create();
                 cmDialog.configCustView(new MulFragmentDialog.ConfigView() {
@@ -96,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.text4:
                 DialogListBuilder.builder()
                         .with(this)
-                        .setDialogEnum(DialogEnum.recy.getCode())
+                        .setDialogStyleEnum(DialogStyleEnum.recy.getCode())
                         .setColumns(4)
-                        .setDialogGrivate(DialogEnum.bottom.getCode())
+                        .setDialogPositionEnum(DialogPositionEnum.bottom.getCode())
                         .setRecyclerViewBg(android.R.color.white)
                         .setCancel("取消", 16, R.color.color_323232, true)
                         .setCancelPadd(0, 0)

@@ -6,7 +6,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
-import com.mul.dialog.DialogEnum;
+import com.mul.dialog.constant.DialogPositionEnum;
+import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.dialog.DialogFactory;
 import com.mul.dialog.dialog.MulDialog;
 
@@ -21,8 +22,8 @@ public class DialogBuilder {
     private int layoutId = -1; // 自定义的布局id
     private int bgColor = -1; // 针对整体布局颜色
     private int centerLayBg = -1; // 针对内容布局背景用图片或者XML文件
-    private int dialogGrivate = DialogEnum.center.getCode(); // 弹框位置
-    private int dialogEnum; // 设置弹出框的样式
+    private int dialogPositionEnum = DialogPositionEnum.center.getCode(); // 弹框位置
+    private int dialogStyleEnum = DialogStyleEnum.def.getCode(); // 设置弹出框的样式
     private int mCenterLeftMar, mCenterTopMar, mCenterRightMar, mCenterBottomMar;
 
     public Context getContext() {
@@ -81,21 +82,21 @@ public class DialogBuilder {
         return this;
     }
 
-    public int getDialogGrivate() {
-        return dialogGrivate;
+    public int getDialogPositionEnum() {
+        return dialogPositionEnum;
     }
 
-    public DialogBuilder setDialogGrivate(int dialogGrivate) {
-        this.dialogGrivate = dialogGrivate;
+    public DialogBuilder setDialogPositionEnum(int dialogPositionEnum) {
+        this.dialogPositionEnum = dialogPositionEnum;
         return this;
     }
 
-    public int getDialogEnum() {
-        return dialogEnum;
+    public int getDialogStyleEnum() {
+        return dialogStyleEnum;
     }
 
-    public DialogBuilder setDialogEnum(int dialogEnum) {
-        this.dialogEnum = dialogEnum;
+    public DialogBuilder setDialogStyleEnum(int dialogStyleEnum) {
+        this.dialogStyleEnum = dialogStyleEnum;
         return this;
     }
 

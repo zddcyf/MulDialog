@@ -14,8 +14,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mul.dialog.constant.DialogListTopEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
-import com.mul.dialog.DialogEnum;
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.build.DialogListBuilder;
@@ -149,7 +149,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
                     , ScreenUtils.px(dialogListBean.getTopPaddTop())
                     , ScreenUtils.px(dialogListBean.getTopPaddRight())
                     , ScreenUtils.px(dialogListBean.getTopPaddBottom()));
-            setTextGrivate(holder.topView, dialogListBean.getTopGrivate());
+            setTextGrivate(holder.topView, dialogListBean.getDialogListTopGrivate());
 
             /**
              * 设置下面的view
@@ -248,11 +248,11 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
     }
 
     private void setTextGrivate(AppCompatTextView topView, int topGrivate) {
-        topView.setGravity(topGrivate == DialogEnum.listBottom.getCode() ? Gravity.BOTTOM
-                : topGrivate == DialogEnum.listTop.getCode() ? Gravity.TOP
-                : topGrivate == DialogEnum.listLeft.getCode() ? Gravity.LEFT
-                : topGrivate == DialogEnum.listRight.getCode() ? Gravity.RIGHT
-                : topGrivate == DialogEnum.listCenter.getCode() ? Gravity.CENTER
+        topView.setGravity(topGrivate == DialogListTopEnum.bottom.getCode() ? Gravity.BOTTOM
+                : topGrivate == DialogListTopEnum.top.getCode() ? Gravity.TOP
+                : topGrivate == DialogListTopEnum.left.getCode() ? Gravity.LEFT
+                : topGrivate == DialogListTopEnum.right.getCode() ? Gravity.RIGHT
+                : topGrivate == DialogListTopEnum.center.getCode() ? Gravity.CENTER
                 : Gravity.CENTER);
     }
 

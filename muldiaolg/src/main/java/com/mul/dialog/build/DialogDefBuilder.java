@@ -93,13 +93,13 @@ public class DialogDefBuilder extends DialogBuilder {
         return this;
     }
 
-    public DialogDefBuilder setDialogGrivate(int dialogGrivate) {
-        super.setDialogGrivate(dialogGrivate);
+    public DialogDefBuilder setDialogPositionEnum(int dialogPositionEnum) {
+        super.setDialogPositionEnum(dialogPositionEnum);
         return this;
     }
 
-    public DialogDefBuilder setDialogEnum(int dialogEnum) {
-        super.setDialogEnum(dialogEnum);
+    public DialogDefBuilder setDialogStyleEnum(int dialogStyleEnum) {
+        super.setDialogStyleEnum(dialogStyleEnum);
         return this;
     }
 
