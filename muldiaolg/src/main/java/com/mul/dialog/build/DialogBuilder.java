@@ -7,8 +7,8 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mul.dialog.DialogEnum;
+import com.mul.dialog.dialog.DialogFactory;
 import com.mul.dialog.dialog.MulDialog;
-import com.mul.dialog.dialog.MulFragmentDialog;
 
 /**
  * Created by zdd
@@ -150,14 +150,6 @@ public class DialogBuilder {
     }
 
     public MulDialog create() {
-        MulDialog mulDialog = null;
-        if (getContext() instanceof Application) {
-
-        } else {
-            mulDialog = new MulFragmentDialog();
-            mulDialog.setBuilder(this);
-            ((MulFragmentDialog) mulDialog).show(((Activity) getContext()).getFragmentManager(), "弹框");
-        }
-        return mulDialog;
+        return DialogFactory.createDialog(this);
     }
 }
