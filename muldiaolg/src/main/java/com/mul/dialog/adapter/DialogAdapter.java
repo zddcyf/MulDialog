@@ -14,11 +14,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mul.dialog.bean.DialogConfigBean;
 import com.mul.dialog.constant.DialogListTopEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.bean.DialogListBean;
-import com.mul.dialog.build.DialogListBuilder;
 import com.mul.dialog.click.list.IDialogListCancelClick;
 import com.mul.dialog.muldiaolg.R;
 
@@ -30,14 +30,14 @@ import com.mul.dialog.muldiaolg.R;
  */
 public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHolder> {
 
-    private final DialogListBuilder mListBuilder;
-    private final MulFragmentDialog cmDialog;
+    private DialogConfigBean mDialogConfigBean;
+    private MulFragmentDialog cmDialog;
     private Context mContext;
 
     public static int CANCEL = 2;
 
-    public DialogAdapter(DialogListBuilder mListBuilder, MulFragmentDialog cmDialog) {
-        this.mListBuilder = mListBuilder;
+    public DialogAdapter(DialogConfigBean mDialogConfigBean, MulFragmentDialog cmDialog) {
+        this.mDialogConfigBean = mDialogConfigBean;
         this.cmDialog = cmDialog;
     }
 
@@ -87,7 +87,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
         setId(topSet, bottomView.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
 
         topSet.constrainWidth(lineView.getId(), ConstraintSet.MATCH_CONSTRAINT);
-        topSet.constrainHeight(lineView.getId(), ScreenUtils.px(mListBuilder.getLineWidth()));
+        topSet.constrainHeight(lineView.getId(), ScreenUtils.px(mDialogConfigBean.getLineWidth()));
         setId(topSet, lineView.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
 
         topSet.applyTo(view);
@@ -103,7 +103,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
         ConstraintSet bottomSet = new ConstraintSet();
         bottomSet.clone(view);
         bottomSet.constrainWidth(cancel.getId(), 0);
-        bottomSet.constrainHeight(cancel.getId(), ScreenUtils.px(mListBuilder.getCancelHeight() == 0 ? 57 : mListBuilder.getCancelHeight()));
+        bottomSet.constrainHeight(cancel.getId(), ScreenUtils.px(mDialogConfigBean.getCancelHeight() == 0 ? 57 : mDialogConfigBean.getCancelHeight()));
         setId(bottomSet, cancel.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
         setId(bottomSet, cancel.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         setId(bottomSet, cancel.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
@@ -114,29 +114,29 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
     public void onBindViewHolder(@NonNull DialogHolder holder, final int position) {
         int itemViewType = getItemViewType(position);
         if (itemViewType != CANCEL) {
-            DialogListBean dialogListBean = mListBuilder.getDatas().get(position);
+            DialogListBean dialogListBean = mDialogConfigBean.getDatas().get(position);
 
             /**
              * 设置整体
              */
-            if (mListBuilder.getTopViewGroupBg() == -1) {
+            if (mDialogConfigBean.getTopViewGroupBg() == -1) {
                 if (position == 0) {
-                    holder.viewGroup.setBackground(mContext.getResources().getDrawable(mListBuilder.getTopViewGroupBgStart() == -1 ? R.drawable.dialog_list_bg_start : mListBuilder.getTopViewGroupBgStart()));
+                    holder.viewGroup.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getTopViewGroupBgStart() == -1 ? R.drawable.dialog_list_bg_start : mDialogConfigBean.getTopViewGroupBgStart()));
                     holder.lineView.setVisibility(View.VISIBLE);
-                } else if (position == mListBuilder.getDatas().size() - 1) {
-                    holder.viewGroup.setBackground(mContext.getResources().getDrawable(mListBuilder.getTopViewGroupBgEnd() == -1 ? R.drawable.dialog_list_bg_end : mListBuilder.getTopViewGroupBgEnd()));
+                } else if (position == mDialogConfigBean.getDatas().size() - 1) {
+                    holder.viewGroup.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getTopViewGroupBgEnd() == -1 ? R.drawable.dialog_list_bg_end : mDialogConfigBean.getTopViewGroupBgEnd()));
                     holder.lineView.setVisibility(View.GONE);
                 } else {
-                    holder.viewGroup.setBackground(mContext.getResources().getDrawable(mListBuilder.getTopViewGroupBgCenter() == -1 ? R.drawable.dialog_list_bg_center : mListBuilder.getTopViewGroupBgCenter()));
+                    holder.viewGroup.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getTopViewGroupBgCenter() == -1 ? R.drawable.dialog_list_bg_center : mDialogConfigBean.getTopViewGroupBgCenter()));
                     holder.lineView.setVisibility(View.VISIBLE);
                 }
             } else {
-                if (position == mListBuilder.getDatas().size() - 1) {
+                if (position == mDialogConfigBean.getDatas().size() - 1) {
                     holder.lineView.setVisibility(View.GONE);
                 } else {
                     holder.lineView.setVisibility(View.VISIBLE);
                 }
-                holder.viewGroup.setBackground(mContext.getResources().getDrawable(mListBuilder.getTopViewGroupBg()));
+                holder.viewGroup.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getTopViewGroupBg()));
             }
 
             /**
@@ -188,8 +188,8 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
                 @Override
                 public void onClick(View v) {
                     cmDialog.dismiss();
-                    if (null != mListBuilder.getiDialogListClick()) {
-                        mListBuilder.getiDialogListClick().btnClick(v, position);
+                    if (null != mDialogConfigBean.getiDialogListClick()) {
+                        mDialogConfigBean.getiDialogListClick().btnClick(v, position);
                     }
                 }
             });
@@ -197,26 +197,26 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
             /**
              * 设置线
              */
-            holder.lineView.setBackgroundColor(mContext.getResources().getColor(mListBuilder.getLineColor() == -1 ? R.color.color_774D4D4D : mListBuilder.getLineColor()));
+            holder.lineView.setBackgroundColor(mContext.getResources().getColor(mDialogConfigBean.getLineColor() == -1 ? R.color.color_774D4D4D : mDialogConfigBean.getLineColor()));
             if (dialogListBean.isLineVisiable()) {
                 holder.lineView.setVisibility(View.VISIBLE);
             } else {
                 holder.lineView.setVisibility(View.GONE);
             }
         } else {
-            holder.viewGroup.setPadding(0, ScreenUtils.px(mListBuilder.getCancelPaddTop()), 0, ScreenUtils.px(mListBuilder.getCancelPaddBottom()));
-            holder.cancel.setBackground(mContext.getResources().getDrawable(mListBuilder.getCancelBg() == -1 ? R.drawable.dialog_list_bg_cancel : mListBuilder.getCancelBg()));
-            holder.cancel.setText(mListBuilder.getCancelStr());
-            holder.cancel.setTextSize(TypedValue.COMPLEX_UNIT_SP, mListBuilder.getCancelSize() == -1 ? 18 : mListBuilder.getCancelSize());
-            holder.cancel.setTextColor(mContext.getResources().getColor(mListBuilder.getCancelColor() == -1 ? R.color.color_505050 : mListBuilder.getCancelColor()));
+            holder.viewGroup.setPadding(0, ScreenUtils.px(mDialogConfigBean.getCancelPaddTop()), 0, ScreenUtils.px(mDialogConfigBean.getCancelPaddBottom()));
+            holder.cancel.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getCancelBg() == -1 ? R.drawable.dialog_list_bg_cancel : mDialogConfigBean.getCancelBg()));
+            holder.cancel.setText(mDialogConfigBean.getCancelStr());
+            holder.cancel.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDialogConfigBean.getCancelSize() == -1 ? 18 : mDialogConfigBean.getCancelSize());
+            holder.cancel.setTextColor(mContext.getResources().getColor(mDialogConfigBean.getCancelColor() == -1 ? R.color.color_505050 : mDialogConfigBean.getCancelColor()));
             holder.cancel.setGravity(Gravity.CENTER);
-            setBold(holder.cancel, mListBuilder.isBottomCanCel());
+            setBold(holder.cancel, mDialogConfigBean.isBottomCanCel());
             holder.viewGroup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     cmDialog.dismiss();
-                    if (null != mListBuilder.getiDialogListClick() && mListBuilder.getiDialogListClick() instanceof IDialogListCancelClick) {
-                        ((IDialogListCancelClick) mListBuilder.getiDialogListClick()).cancelClick(v);
+                    if (null != mDialogConfigBean.getiDialogListClick() && mDialogConfigBean.getiDialogListClick() instanceof IDialogListCancelClick) {
+                        ((IDialogListCancelClick) mDialogConfigBean.getiDialogListClick()).cancelClick(v);
                     }
                 }
             });
@@ -258,12 +258,12 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
 
     @Override
     public int getItemCount() {
-        return null != mListBuilder.getDatas() && mListBuilder.getDatas().size() != 0 ? mListBuilder.isBottomCanCel() ? mListBuilder.getDatas().size() + 1 : mListBuilder.getDatas().size() : 0;
+        return null != mDialogConfigBean.getDatas() && mDialogConfigBean.getDatas().size() != 0 ? mDialogConfigBean.isBottomCanCel() ? mDialogConfigBean.getDatas().size() + 1 : mDialogConfigBean.getDatas().size() : 0;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mListBuilder.getDatas().size() && mListBuilder.isBottomCanCel()) {
+        if (position == mDialogConfigBean.getDatas().size() && mDialogConfigBean.isBottomCanCel()) {
             return CANCEL;
         }
         return super.getItemViewType(position);

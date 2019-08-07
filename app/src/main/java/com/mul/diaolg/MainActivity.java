@@ -10,8 +10,6 @@ import com.mul.dialog.constant.DialogPositionEnum;
 import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.bean.DialogListBean;
-import com.mul.dialog.build.DialogDefBuilder;
-import com.mul.dialog.build.DialogListBuilder;
 import com.mul.dialog.click.def.IDialogDefAllClick;
 import com.mul.dialog.click.list.IDialogListCancelClick;
 
@@ -27,13 +25,13 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.text1:
-                DialogDefBuilder.builder()
+                MulFragmentDialog.getInstance().builder()
                         .with(this)
                         .setCenterMargin(50, 50)
                         .setContent("搜索正在加紧研发中")
                         .setSubmitBold(true)
                         .setCanAndConBold(true)
-                        .setClick(new IDialogDefAllClick() {
+                        .setDefClick(new IDialogDefAllClick() {
                             @Override
                             public void cancelClick(View v) {
 
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                         }).create();
                 break;
             case R.id.text2:
-                DialogListBuilder.builder()
+                MulFragmentDialog.getInstance().builder()
                         .with(this)
                         .setDialogStyleEnum(DialogStyleEnum.list.getCode())
                         .setDialogPositionEnum(DialogPositionEnum.bottom.getCode())
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         }).create();
                 break;
             case R.id.text3:
-                cmDialog = (MulFragmentDialog) DialogDefBuilder.builder()
+                cmDialog = MulFragmentDialog.getInstance().builder()
                         .with(this)
                         .setDialogStyleEnum(-1)
                         .setLayoutId(R.layout.ac_rel_dialog_surr)
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
             case R.id.text4:
-                DialogListBuilder.builder()
+                MulFragmentDialog.getInstance().builder()
                         .with(this)
                         .setDialogStyleEnum(DialogStyleEnum.recy.getCode())
                         .setColumns(4)

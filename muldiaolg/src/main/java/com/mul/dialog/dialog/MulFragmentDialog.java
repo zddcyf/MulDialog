@@ -23,9 +23,8 @@ import android.widget.RelativeLayout;
 
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.adapter.DialogAdapter;
+import com.mul.dialog.bean.DialogConfigBean;
 import com.mul.dialog.build.DialogBuilder;
-import com.mul.dialog.build.DialogDefBuilder;
-import com.mul.dialog.build.DialogListBuilder;
 import com.mul.dialog.click.def.IDialogDefAllClick;
 import com.mul.dialog.click.def.IDialogDefCancelClick;
 import com.mul.dialog.constant.DialogPositionEnum;
@@ -38,7 +37,7 @@ import com.mul.dialog.muldiaolg.R;
  * at 11:12
  * summary:
  */
-public class MulFragmentDialog extends DialogFragment implements MulDialog {
+public class MulFragmentDialog extends DialogFragment {
     /**
      * 初始化view1
      */
@@ -66,9 +65,7 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
     /**
      * 参数传递
      */
-    private DialogBuilder mBuilder;
-    private DialogDefBuilder mDefBuilder;
-    private DialogListBuilder mListBuilder;
+    private DialogConfigBean mDialogConfigBean;
     private View custView;
     private ConfigView configView;
 
@@ -83,11 +80,11 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
             WindowManager.LayoutParams layoutParams = window.getAttributes();
 
 //            layoutParams.windowAnimations = R.style.MusicDialog;//动画
-            if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.top.getCode()) {
+            if (mDialogConfigBean.getDialogPositionEnum() == DialogPositionEnum.top.getCode()) {
                 layoutParams.gravity = Gravity.TOP; // 位置
-            } else if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.center.getCode()) {
+            } else if (mDialogConfigBean.getDialogPositionEnum() == DialogPositionEnum.center.getCode()) {
                 layoutParams.gravity = Gravity.CENTER; // 位置
-            } else if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.bottom.getCode()) {
+            } else if (mDialogConfigBean.getDialogPositionEnum() == DialogPositionEnum.bottom.getCode()) {
                 layoutParams.gravity = Gravity.BOTTOM; // 位置
             } else {
                 layoutParams.gravity = Gravity.CENTER; // 位置
@@ -102,17 +99,15 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        mBgConslay = new RelativeLayout(mBuilder.getContext());
-        mContentConslay = new ConstraintLayout(mBuilder.getContext());
-        if (mBuilder.getDialogStyleEnum() == DialogStyleEnum.def.getCode()) {
-            mDefBuilder = (DialogDefBuilder) mBuilder;
+        mBgConslay = new RelativeLayout(mDialogConfigBean.getContext());
+        mContentConslay = new ConstraintLayout(mDialogConfigBean.getContext());
+        if (mDialogConfigBean.getDialogStyleEnum() == DialogStyleEnum.def.getCode()) {
             getDefaultView();
             setDefClick();
-        } else if (mBuilder.getDialogStyleEnum() == DialogStyleEnum.list.getCode() || mBuilder.getDialogStyleEnum() == DialogStyleEnum.recy.getCode()) {
-            mListBuilder = (DialogListBuilder) mBuilder;
+        } else if (mDialogConfigBean.getDialogStyleEnum() == DialogStyleEnum.list.getCode() || mDialogConfigBean.getDialogStyleEnum() == DialogStyleEnum.recy.getCode()) {
             getListView();
         } else {
-            custView = View.inflate(mBuilder.getContext(), mBuilder.getLayoutId(), null);
+            custView = View.inflate(mDialogConfigBean.getContext(), mDialogConfigBean.getLayoutId(), null);
             mContentConslay.addView(custView);
             constraintSet = new ConstraintSet();
             constraintSet.clone(mContentConslay);
@@ -129,36 +124,36 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         }
         mBgConslay.addView(mContentConslay);
         mBgConslay.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mBgConslay.setBackgroundColor(mBuilder.getContext().getResources().getColor(android.R.color.transparent));
+        mBgConslay.setBackgroundColor(mDialogConfigBean.getContext().getResources().getColor(android.R.color.transparent));
         /**
          * 默认弹出框为中间时。中间的父布局
          */
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mContentConslay.getLayoutParams();
-        if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.top.getCode()) {
+        if (mDialogConfigBean.getDialogPositionEnum() == DialogPositionEnum.top.getCode()) {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-        } else if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.center.getCode()) {
+        } else if (mDialogConfigBean.getDialogPositionEnum() == DialogPositionEnum.center.getCode()) {
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        } else if (mBuilder.getDialogPositionEnum() == DialogPositionEnum.bottom.getCode()) {
+        } else if (mDialogConfigBean.getDialogPositionEnum() == DialogPositionEnum.bottom.getCode()) {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         } else {
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         }
         layoutParams.width = RelativeLayout.LayoutParams.MATCH_PARENT;
         layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
-        layoutParams.setMargins(ScreenUtils.px(mBuilder.getCenterLeftMar()), ScreenUtils.px(mBuilder.getCenterTopMar())
-                , ScreenUtils.px(mBuilder.getCenterRightMar()), ScreenUtils.px(mBuilder.getCenterBottomMar()));
+        layoutParams.setMargins(ScreenUtils.px(mDialogConfigBean.getCenterLeftMar()), ScreenUtils.px(mDialogConfigBean.getCenterTopMar())
+                , ScreenUtils.px(mDialogConfigBean.getCenterRightMar()), ScreenUtils.px(mDialogConfigBean.getCenterBottomMar()));
         mContentConslay.setLayoutParams(layoutParams);
         return mBgConslay;
     }
 
     private void getDefaultView() {
-        mTitle = new AppCompatTextView(mBuilder.getContext());
-        mSubmitLine = new View(mBuilder.getContext());
-        mContent = new AppCompatTextView(mBuilder.getContext());
-        mContentLine = new View(mBuilder.getContext());
-        mCancel = new AppCompatTextView(mBuilder.getContext());
-        mConfirm = new AppCompatTextView(mBuilder.getContext());
-        mCanAndConCenterLine = new View(mBuilder.getContext());
+        mTitle = new AppCompatTextView(mDialogConfigBean.getContext());
+        mSubmitLine = new View(mDialogConfigBean.getContext());
+        mContent = new AppCompatTextView(mDialogConfigBean.getContext());
+        mContentLine = new View(mDialogConfigBean.getContext());
+        mCancel = new AppCompatTextView(mDialogConfigBean.getContext());
+        mConfirm = new AppCompatTextView(mDialogConfigBean.getContext());
+        mCanAndConCenterLine = new View(mDialogConfigBean.getContext());
         /**
          * 设置id
          */
@@ -189,10 +184,10 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         mContentConslay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mDefBuilder.getiDialogDefClick()) {
-                    if (mDefBuilder.getiDialogDefClick() instanceof IDialogDefAllClick) {
+                if (null != mDialogConfigBean.getiDialogDefClick()) {
+                    if (mDialogConfigBean.getiDialogDefClick() instanceof IDialogDefAllClick) {
                         dismiss();
-                        ((IDialogDefAllClick) mDefBuilder.getiDialogDefClick()).touchClick(v);
+                        ((IDialogDefAllClick) mDialogConfigBean.getiDialogDefClick()).touchClick(v);
                     }
                 }
             }
@@ -201,12 +196,12 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mDefBuilder.getiDialogDefClick()) {
+                if (null != mDialogConfigBean.getiDialogDefClick()) {
                     dismiss();
-                    if (mDefBuilder.getiDialogDefClick() instanceof IDialogDefAllClick) {
-                        ((IDialogDefAllClick) mDefBuilder.getiDialogDefClick()).cancelClick(v);
-                    } else if (mDefBuilder.getiDialogDefClick() instanceof IDialogDefCancelClick) {
-                        ((IDialogDefCancelClick) mDefBuilder.getiDialogDefClick()).cancelClick(v);
+                    if (mDialogConfigBean.getiDialogDefClick() instanceof IDialogDefAllClick) {
+                        ((IDialogDefAllClick) mDialogConfigBean.getiDialogDefClick()).cancelClick(v);
+                    } else if (mDialogConfigBean.getiDialogDefClick() instanceof IDialogDefCancelClick) {
+                        ((IDialogDefCancelClick) mDialogConfigBean.getiDialogDefClick()).cancelClick(v);
                     }
                 }
             }
@@ -215,9 +210,9 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         mConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mDefBuilder.getiDialogDefClick()) {
+                if (null != mDialogConfigBean.getiDialogDefClick()) {
                     dismiss();
-                    mDefBuilder.getiDialogDefClick().confirmClick(v);
+                    mDialogConfigBean.getiDialogDefClick().confirmClick(v);
                 }
             }
         });
@@ -262,28 +257,28 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         setCanAndConCenterLine();
 
         constraintSet.applyTo(mContentConslay);
-        mTitle.setVisibility(TextUtils.isEmpty(mDefBuilder.getmSubmit()) ? View.GONE : View.VISIBLE);
-        mSubmitLine.setVisibility(mDefBuilder.isSubmitLine() ? View.VISIBLE : View.GONE);
-        mContentLine.setVisibility(mDefBuilder.isSontentLine() ? View.VISIBLE : View.GONE);
-        if (mDefBuilder.getBtnNumber() == DialogStyleEnum.first.getCode()) {
+        mTitle.setVisibility(TextUtils.isEmpty(mDialogConfigBean.getmSubmit()) ? View.GONE : View.VISIBLE);
+        mSubmitLine.setVisibility(mDialogConfigBean.isSubmitLine() ? View.VISIBLE : View.GONE);
+        mContentLine.setVisibility(mDialogConfigBean.isSontentLine() ? View.VISIBLE : View.GONE);
+        if (mDialogConfigBean.getBtnNumber() == DialogStyleEnum.first.getCode()) {
             mCancel.setVisibility(View.GONE);
             mCanAndConCenterLine.setVisibility(View.GONE);
-        } else if (mDefBuilder.getBtnNumber() == DialogStyleEnum.second.getCode()) {
+        } else if (mDialogConfigBean.getBtnNumber() == DialogStyleEnum.second.getCode()) {
             mCancel.setVisibility(View.VISIBLE);
             mCanAndConCenterLine.setVisibility(View.VISIBLE);
         }
     }
 
     private void setContentLayout() {
-        if (mBuilder.getCenterLayBg() != -1) {
-            String resourceTypeName = getResources().getResourceTypeName(mBuilder.getCenterLayBg());
+        if (mDialogConfigBean.getCenterLayoutBg() != -1) {
+            String resourceTypeName = getResources().getResourceTypeName(mDialogConfigBean.getCenterLayoutBg());
             if (resourceTypeName.contains("drawable")) {
-                mContentConslay.setBackground(getResources().getDrawable(mBuilder.getCenterLayBg()));
+                mContentConslay.setBackground(getResources().getDrawable(mDialogConfigBean.getCenterLayoutBg()));
             } else if (resourceTypeName.contains("color")) {
-                mContentConslay.setBackgroundColor(getResources().getColor(mBuilder.getCenterLayBg()));
+                mContentConslay.setBackgroundColor(getResources().getColor(mDialogConfigBean.getCenterLayoutBg()));
             }
         } else {
-            if (mBuilder.getDialogStyleEnum() == DialogStyleEnum.def.getCode()) {
+            if (mDialogConfigBean.getDialogStyleEnum() == DialogStyleEnum.def.getCode()) {
                 mContentConslay.setBackground(getResources().getDrawable(R.drawable.dialog_def_bg));
             }
         }
@@ -298,11 +293,11 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         setId(constraintSet, mTitle.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
         setId(constraintSet, mTitle.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         setId(constraintSet, mTitle.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
-        mTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDefBuilder.getmSubmitSize() == -1 ? 14 : mDefBuilder.getmSubmitSize());
-        mTitle.setTextColor(mBuilder.getContext().getResources().getColor(mDefBuilder.getmSubmitColor() == -1 ? R.color.color_323232 : mDefBuilder.getmSubmitColor()));
-        mTitle.setPadding(mDefBuilder.getmSubmitLeftPadd(), mDefBuilder.getmSubmitTopPadd(), mDefBuilder.getmSubmitRightPadd(), mDefBuilder.getmSubmitBottomPadd());
-        mTitle.setText(mDefBuilder.getmSubmit());
-        if (mDefBuilder.isSubmitBold()) {
+        mTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDialogConfigBean.getSubmitSize() == -1 ? 14 : mDialogConfigBean.getSubmitSize());
+        mTitle.setTextColor(mDialogConfigBean.getContext().getResources().getColor(mDialogConfigBean.getSubmitColor() == -1 ? R.color.color_323232 : mDialogConfigBean.getSubmitColor()));
+        mTitle.setPadding(mDialogConfigBean.getSubmitLeftPadd(), mDialogConfigBean.getSubmitTopPadd(), mDialogConfigBean.getmSubmitRightPadd(), mDialogConfigBean.getSubmitBottomPadd());
+        mTitle.setText(mDialogConfigBean.getmSubmit());
+        if (mDialogConfigBean.isSubmitBold()) {
             TextPaint paint = mTitle.getPaint();
             paint.setFakeBoldText(true);
         }
@@ -313,11 +308,11 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
      */
     private void setSubmitLine() {
         constraintSet.constrainWidth(mSubmitLine.getId(), 0);
-        constraintSet.constrainHeight(mSubmitLine.getId(), ScreenUtils.px(mDefBuilder.getmLineWidth()));
+        constraintSet.constrainHeight(mSubmitLine.getId(), ScreenUtils.px(mDialogConfigBean.getLineWidth()));
         setId(constraintSet, mSubmitLine.getId(), ConstraintSet.TOP, mTitle.getId(), ConstraintSet.BOTTOM);
         setId(constraintSet, mSubmitLine.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         setId(constraintSet, mSubmitLine.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
-        mSubmitLine.setBackgroundColor(mBuilder.getContext().getResources().getColor(mDefBuilder.getmLineColor() == -1 ? R.color.color_774D4D4D : mDefBuilder.getmLineColor()));
+        mSubmitLine.setBackgroundColor(mDialogConfigBean.getContext().getResources().getColor(mDialogConfigBean.getLineColor() == -1 ? R.color.color_774D4D4D : mDialogConfigBean.getLineColor()));
 
     }
 
@@ -330,15 +325,15 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         setId(constraintSet, mContent.getId(), ConstraintSet.TOP, mSubmitLine.getId(), ConstraintSet.BOTTOM);
         setId(constraintSet, mContent.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         setId(constraintSet, mContent.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
-        mContent.setGravity(mDefBuilder.getmContentGravite() == -1 ? Gravity.CENTER : mDefBuilder.getmContentGravite());
-        mContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDefBuilder.getmContentSize() == -1 ? 14 : mDefBuilder.getmContentSize());
-        mContent.setTextColor(mBuilder.getContext().getResources().getColor(mDefBuilder.getmContentColor() == -1 ? R.color.color_323232 : mDefBuilder.getmContentColor()));
-        mContent.setText(TextUtils.isEmpty(mDefBuilder.getmContentStr()) ? "请填写内容" : mDefBuilder.getmContentStr());
-        mContent.setPadding(ScreenUtils.px(mDefBuilder.getmContentLeftPadd())
-                , ScreenUtils.px(mDefBuilder.getmContentTopPadd())
-                , ScreenUtils.px(mDefBuilder.getmContentRightPadd())
-                , ScreenUtils.px(mDefBuilder.getmContentBottomPadd()));
-        if (mDefBuilder.isContentBold()) {
+        mContent.setGravity(mDialogConfigBean.getContentGravite() == -1 ? Gravity.CENTER : mDialogConfigBean.getContentGravite());
+        mContent.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDialogConfigBean.getContentSize() == -1 ? 14 : mDialogConfigBean.getContentSize());
+        mContent.setTextColor(mDialogConfigBean.getContext().getResources().getColor(mDialogConfigBean.getContentColor() == -1 ? R.color.color_323232 : mDialogConfigBean.getContentColor()));
+        mContent.setText(TextUtils.isEmpty(mDialogConfigBean.getContentStr()) ? "请填写内容" : mDialogConfigBean.getContentStr());
+        mContent.setPadding(ScreenUtils.px(mDialogConfigBean.getContentLeftPadd())
+                , ScreenUtils.px(mDialogConfigBean.getContentTopPadd())
+                , ScreenUtils.px(mDialogConfigBean.getContentRightPadd())
+                , ScreenUtils.px(mDialogConfigBean.getContentBottomPadd()));
+        if (mDialogConfigBean.isContentBold()) {
             TextPaint paint = mContent.getPaint();
             paint.setFakeBoldText(true);
         }
@@ -349,24 +344,24 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
      */
     private void setDefContentLine() {
         constraintSet.constrainWidth(mContentLine.getId(), 0);
-        constraintSet.constrainHeight(mContentLine.getId(), ScreenUtils.px(mDefBuilder.getmLineWidth()));
+        constraintSet.constrainHeight(mContentLine.getId(), ScreenUtils.px(mDialogConfigBean.getLineWidth()));
         setId(constraintSet, mContentLine.getId(), ConstraintSet.TOP, mContent.getId(), ConstraintSet.BOTTOM);
         setId(constraintSet, mContentLine.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         setId(constraintSet, mContentLine.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
-        mContentLine.setBackgroundColor(mBuilder.getContext().getResources().getColor(mDefBuilder.getmLineColor() == -1 ? R.color.color_774D4D4D : mDefBuilder.getmLineColor()));
+        mContentLine.setBackgroundColor(mDialogConfigBean.getContext().getResources().getColor(mDialogConfigBean.getLineColor() == -1 ? R.color.color_774D4D4D : mDialogConfigBean.getLineColor()));
     }
 
     /**
      * 确认取消中间的线
      */
     private void setCanAndConCenterLine() {
-        constraintSet.constrainWidth(mCanAndConCenterLine.getId(), ScreenUtils.px(mDefBuilder.getmLineWidth()));
+        constraintSet.constrainWidth(mCanAndConCenterLine.getId(), ScreenUtils.px(mDialogConfigBean.getLineWidth()));
         constraintSet.constrainHeight(mCanAndConCenterLine.getId(), 0);
         setId(constraintSet, mCanAndConCenterLine.getId(), ConstraintSet.TOP, mCancel.getId(), ConstraintSet.TOP);
         setId(constraintSet, mCanAndConCenterLine.getId(), ConstraintSet.BOTTOM, mCancel.getId(), ConstraintSet.BOTTOM);
         setId(constraintSet, mCanAndConCenterLine.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         setId(constraintSet, mCanAndConCenterLine.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
-        mCanAndConCenterLine.setBackgroundColor(mBuilder.getContext().getResources().getColor(mDefBuilder.getmLineColor() == -1 ? R.color.color_774D4D4D : mDefBuilder.getmLineColor()));
+        mCanAndConCenterLine.setBackgroundColor(mDialogConfigBean.getContext().getResources().getColor(mDialogConfigBean.getLineColor() == -1 ? R.color.color_774D4D4D : mDialogConfigBean.getLineColor()));
     }
 
     /**
@@ -378,10 +373,10 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         setId(constraintSet, mCancel.getId(), ConstraintSet.TOP, mContentLine.getId(), ConstraintSet.BOTTOM);
         setId(constraintSet, mCancel.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         setId(constraintSet, mCancel.getId(), ConstraintSet.RIGHT, mCanAndConCenterLine.getId(), ConstraintSet.LEFT);
-        mCancel.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDefBuilder.getmCancelSize() == -1 ? 14 : mDefBuilder.getmCancelSize());
-        mCancel.setTextColor(mBuilder.getContext().getResources().getColor(mDefBuilder.getmCancelColor() == -1 ? R.color.color_007AFF : mDefBuilder.getmCancelColor()));
-        mCancel.setText(TextUtils.isEmpty(mDefBuilder.getmCancelStr()) ? "取消" : mDefBuilder.getmCancelStr());
-        if (mDefBuilder.isCanAndConBold()) {
+        mCancel.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDialogConfigBean.getCancelSize() == -1 ? 14 : mDialogConfigBean.getCancelSize());
+        mCancel.setTextColor(mDialogConfigBean.getContext().getResources().getColor(mDialogConfigBean.getCancelColor() == -1 ? R.color.color_007AFF : mDialogConfigBean.getCancelColor()));
+        mCancel.setText(TextUtils.isEmpty(mDialogConfigBean.getCancelStr()) ? "取消" : mDialogConfigBean.getCancelStr());
+        if (mDialogConfigBean.isCanAndConBold()) {
             TextPaint paint = mCancel.getPaint();
             paint.setFakeBoldText(true);
         }
@@ -394,16 +389,16 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
         constraintSet.constrainWidth(mConfirm.getId(), 0);
         constraintSet.constrainHeight(mConfirm.getId(), ScreenUtils.px(43));
         setId(constraintSet, mConfirm.getId(), ConstraintSet.TOP, mContentLine.getId(), ConstraintSet.BOTTOM);
-        if (mDefBuilder.getBtnNumber() == DialogStyleEnum.first.getCode()) {
+        if (mDialogConfigBean.getBtnNumber() == DialogStyleEnum.first.getCode()) {
             setId(constraintSet, mConfirm.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
-        } else if (mDefBuilder.getBtnNumber() == DialogStyleEnum.second.getCode()) {
+        } else if (mDialogConfigBean.getBtnNumber() == DialogStyleEnum.second.getCode()) {
             setId(constraintSet, mConfirm.getId(), ConstraintSet.LEFT, mCanAndConCenterLine.getId(), ConstraintSet.RIGHT);
         }
         setId(constraintSet, mConfirm.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
-        mConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDefBuilder.getmConfirmSize() == -1 ? 14 : mDefBuilder.getmConfirmSize());
-        mConfirm.setTextColor(mBuilder.getContext().getResources().getColor(mDefBuilder.getmConfirmColor() == -1 ? R.color.color_007AFF : mDefBuilder.getmConfirmColor()));
-        mConfirm.setText(TextUtils.isEmpty(mDefBuilder.getmConfirmStr()) ? "确认" : mDefBuilder.getmConfirmStr());
-        if (mDefBuilder.isCanAndConBold()) {
+        mConfirm.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDialogConfigBean.getConfirmSize() == -1 ? 14 : mDialogConfigBean.getConfirmSize());
+        mConfirm.setTextColor(mDialogConfigBean.getContext().getResources().getColor(mDialogConfigBean.getConfirmColor() == -1 ? R.color.color_007AFF : mDialogConfigBean.getConfirmColor()));
+        mConfirm.setText(TextUtils.isEmpty(mDialogConfigBean.getConfirmStr()) ? "确认" : mDialogConfigBean.getConfirmStr());
+        if (mDialogConfigBean.isCanAndConBold()) {
             TextPaint paint = mConfirm.getPaint();
             paint.setFakeBoldText(true);
         }
@@ -414,27 +409,27 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
     }
 
     private void getListView() {
-        mRecyclerView = new RecyclerView(mBuilder.getContext());
+        mRecyclerView = new RecyclerView(mDialogConfigBean.getContext());
         mRecyclerView.setId(R.id.mRecyclerView);
-        if (mListBuilder.getDialogStyleEnum() == DialogStyleEnum.list.getCode()) {
+        if (mDialogConfigBean.getDialogStyleEnum() == DialogStyleEnum.list.getCode()) {
             // 类似于list列表形式的
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(mBuilder.getContext()));
-        } else if (mListBuilder.getDialogStyleEnum() == DialogStyleEnum.recy.getCode()) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mDialogConfigBean.getContext()));
+        } else if (mDialogConfigBean.getDialogStyleEnum() == DialogStyleEnum.recy.getCode()) {
             // 类似于gridview形式的
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(mBuilder.getContext(), mListBuilder.getColumns());
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(mDialogConfigBean.getContext(), mDialogConfigBean.getColumns());
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
                     int itemViewType = mRecyclerView.getAdapter().getItemViewType(position);
                     if (itemViewType == DialogAdapter.CANCEL) {
-                        return mListBuilder.getColumns();
+                        return mDialogConfigBean.getColumns();
                     }
                     return 1;
                 }
             });
             mRecyclerView.setLayoutManager(gridLayoutManager);
         }
-        mAdapter = new DialogAdapter((DialogListBuilder) mBuilder, this);
+        mAdapter = new DialogAdapter(mDialogConfigBean, this);
         mRecyclerView.setAdapter(mAdapter);
         mContentConslay.addView(mRecyclerView);
         constraintSet = new ConstraintSet();
@@ -451,29 +446,41 @@ public class MulFragmentDialog extends DialogFragment implements MulDialog {
     }
 
     private void recyBg() {
-        if (((DialogListBuilder) mBuilder).getRecyclerViewBg() != -1) {
-            String resourceTypeName = getResources().getResourceTypeName(((DialogListBuilder) mBuilder).getRecyclerViewBg());
+        if (mDialogConfigBean.getRecyclerViewBg() != -1) {
+            String resourceTypeName = getResources().getResourceTypeName(mDialogConfigBean.getRecyclerViewBg());
             if (resourceTypeName.contains("drawable")) {
-                mRecyclerView.setBackground(getResources().getDrawable(((DialogListBuilder) mBuilder).getRecyclerViewBg()));
+                mRecyclerView.setBackground(getResources().getDrawable(mDialogConfigBean.getRecyclerViewBg()));
             } else if (resourceTypeName.contains("color")) {
-                mRecyclerView.setBackgroundColor(getResources().getColor(((DialogListBuilder) mBuilder).getRecyclerViewBg()));
+                mRecyclerView.setBackgroundColor(getResources().getColor(mDialogConfigBean.getRecyclerViewBg()));
             }
         }
     }
 
-    public void setBuilder(DialogBuilder mBuilder) {
-        this.mBuilder = mBuilder;
+    public void setBuilder(DialogConfigBean mBuilder) {
+        this.mDialogConfigBean = mBuilder;
     }
 
     public void configCustView(ConfigView configView) {
         this.configView = configView;
     }
 
-    @Override
-    public MulDialog getInstance() {
-        return this;
+    public DialogBuilder builder() {
+        /**
+         * 因为是单例。所以需要在初始化的时候主动清理掉缓存信息
+         */
+        if (null != mDialogConfigBean && null != mDialogConfigBean.getDatas() && mDialogConfigBean.getDatas().size() > 0) {
+            mDialogConfigBean.getDatas().clear();
+        }
+        return DialogBuilder.builder();
     }
 
+    public static MulFragmentDialog getInstance() {
+        return MulFragmentDialogHolder.mulFragmentDialog;
+    }
+
+    private static class MulFragmentDialogHolder {
+        private static final MulFragmentDialog mulFragmentDialog = new MulFragmentDialog();
+    }
 
     public interface ConfigView {
         void configCustView(View v);
