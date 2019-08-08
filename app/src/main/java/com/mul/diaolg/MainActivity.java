@@ -14,8 +14,6 @@ import com.mul.dialog.click.def.IDialogDefAllClick;
 import com.mul.dialog.click.list.IDialogListCancelClick;
 
 public class MainActivity extends AppCompatActivity {
-    private MulFragmentDialog cmDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,22 +69,28 @@ public class MainActivity extends AppCompatActivity {
                         }).create();
                 break;
             case R.id.text3:
-                cmDialog = MulFragmentDialog.getInstance().builder()
+                MulFragmentDialog.getInstance().builder()
                         .with(this)
                         .setDialogStyleEnum(-1)
                         .setLayoutId(R.layout.ac_rel_dialog_surr)
                         .setCenterMargin(50, 50).create();
-                cmDialog.configCustView(new MulFragmentDialog.ConfigView() {
+                MulFragmentDialog.getInstance().configCustView(new MulFragmentDialog.ConfigView() {
                     @Override
                     public void configCustView(View v) {
                         AppCompatTextView submit = v.findViewById(R.id.submit);
                         AppCompatTextView cancel = v.findViewById(R.id.cancel);
                         AppCompatTextView confirm = v.findViewById(R.id.confirm);
                         final AppCompatEditText content = v.findViewById(R.id.content);
-
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                MulFragmentDialog.getInstance().dismiss();
+                            }
+                        });
                         confirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                MulFragmentDialog.getInstance().dismiss();
                             }
                         });
                     }
