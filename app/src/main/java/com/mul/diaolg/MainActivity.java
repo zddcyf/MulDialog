@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.text1:
                 MulFragmentDialog.getInstance().builder()
                         .with(this)
+                        .setDialogStyleEnum(DialogStyleEnum.def.getCode())
+                        .setDialogPositionEnum(DialogPositionEnum.center.getCode())
                         .setCenterMargin(50, 50)
                         .setContent("搜索正在加紧研发中")
                         .setSubmitBold(true)
