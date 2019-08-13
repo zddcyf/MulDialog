@@ -108,6 +108,7 @@ public class MulFragmentDialog extends DialogFragment {
             getListView();
         } else {
             custView = View.inflate(mDialogConfigBean.getContext(), mDialogConfigBean.getLayoutId(), null);
+            custView.setId(R.id.mulView);
             mContentConslay.addView(custView);
             constraintSet = new ConstraintSet();
             constraintSet.clone(mContentConslay);

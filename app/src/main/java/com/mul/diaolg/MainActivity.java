@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mul.dialog.constant.DialogPositionEnum;
 import com.mul.dialog.constant.DialogStyleEnum;
@@ -79,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
                 MulFragmentDialog.getInstance().configCustView(new MulFragmentDialog.ConfigView() {
                     @Override
                     public void configCustView(View v) {
+                        v.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (v.getId() == R.id.mulView) {
+                                    Toast.makeText(MainActivity.this, "我是设置后的总布局", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                         AppCompatTextView submit = v.findViewById(R.id.submit);
                         AppCompatTextView cancel = v.findViewById(R.id.cancel);
                         AppCompatTextView confirm = v.findViewById(R.id.confirm);
