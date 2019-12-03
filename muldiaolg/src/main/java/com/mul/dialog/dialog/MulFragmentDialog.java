@@ -25,17 +25,23 @@ import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.adapter.DialogAdapter;
 import com.mul.dialog.bean.DialogConfigBean;
 import com.mul.dialog.build.DialogBuilder;
-import com.mul.dialog.click.def.IDialogDefAllClick;
-import com.mul.dialog.click.def.IDialogDefCancelClick;
+import com.mul.dialog.click.IDialogAllClick;
+import com.mul.dialog.click.IDialogCancelClick;
 import com.mul.dialog.constant.DialogPositionEnum;
 import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.muldiaolg.R;
 
 /**
- * Created by 盈东科技
- * on 2018/11/24
- * at 11:12
- * summary:
+ * @ProjectName: MulDialog
+ * @Package: com.mul.dialog.click
+ * @ClassName: IDialogTouchClick
+ * @Author: zdd
+ * @CreateDate: 2019/12/3 20:59
+ * @Description: java类作用描述
+ * @UpdateUser: 更新者
+ * @UpdateDate: 2019/12/3 20:59
+ * @UpdateRemark: 更新说明
+ * @Version: 1.0.0
  */
 public class MulFragmentDialog extends DialogFragment {
     /**
@@ -182,39 +188,30 @@ public class MulFragmentDialog extends DialogFragment {
     }
 
     private void setDefClick() {
-        mContentConslay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mDialogConfigBean.getiDialogDefClick()) {
-                    if (mDialogConfigBean.getiDialogDefClick() instanceof IDialogDefAllClick) {
-                        dismiss();
-                        ((IDialogDefAllClick) mDialogConfigBean.getiDialogDefClick()).touchClick(v);
-                    }
+        mContentConslay.setOnClickListener(v -> {
+            if (null != mDialogConfigBean.getiDialogClick()) {
+                if (mDialogConfigBean.getiDialogClick() instanceof IDialogAllClick) {
+                    dismiss();
+                    ((IDialogAllClick) mDialogConfigBean.getiDialogClick()).touchClick(v);
                 }
             }
         });
 
-        mCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mDialogConfigBean.getiDialogDefClick()) {
-                    dismiss();
-                    if (mDialogConfigBean.getiDialogDefClick() instanceof IDialogDefAllClick) {
-                        ((IDialogDefAllClick) mDialogConfigBean.getiDialogDefClick()).cancelClick(v);
-                    } else if (mDialogConfigBean.getiDialogDefClick() instanceof IDialogDefCancelClick) {
-                        ((IDialogDefCancelClick) mDialogConfigBean.getiDialogDefClick()).cancelClick(v);
-                    }
+        mCancel.setOnClickListener(v -> {
+            if (null != mDialogConfigBean.getiDialogClick()) {
+                dismiss();
+                if (mDialogConfigBean.getiDialogClick() instanceof IDialogAllClick) {
+                    ((IDialogAllClick) mDialogConfigBean.getiDialogClick()).cancelClick(v);
+                } else if (mDialogConfigBean.getiDialogClick() instanceof IDialogCancelClick) {
+                    ((IDialogCancelClick) mDialogConfigBean.getiDialogClick()).cancelClick(v);
                 }
             }
         });
 
-        mConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mDialogConfigBean.getiDialogDefClick()) {
-                    dismiss();
-                    mDialogConfigBean.getiDialogDefClick().confirmClick(v);
-                }
+        mConfirm.setOnClickListener(v -> {
+            if (null != mDialogConfigBean.getiDialogClick()) {
+                dismiss();
+                mDialogConfigBean.getiDialogClick().confirmClick(v, 0);
             }
         });
     }

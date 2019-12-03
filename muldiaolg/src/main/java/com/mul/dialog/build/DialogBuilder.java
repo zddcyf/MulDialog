@@ -8,17 +8,22 @@ import android.util.Log;
 
 import com.mul.dialog.bean.DialogConfigBean;
 import com.mul.dialog.bean.DialogListBean;
-import com.mul.dialog.click.def.IDialogDefClick;
-import com.mul.dialog.click.list.IDialogListClick;
+import com.mul.dialog.click.IDialogClick;
 import com.mul.dialog.dialog.MulFragmentDialog;
 
 import java.util.List;
 
 /**
- * Created by zdd
- * on 2018/12/5
- * at 14:38
- * summary:
+ * @ProjectName: MulDialog
+ * @Package: com.mul.dialog.click
+ * @ClassName: IDialogTouchClick
+ * @Author: zdd
+ * @CreateDate: 2019/12/3 20:59
+ * @Description: 弹框的构建者
+ * @UpdateUser: 更新者
+ * @UpdateDate: 2019/12/3 20:59
+ * @UpdateRemark: 更新说明
+ * @Version: 1.0.0
  */
 public class DialogBuilder {
     private DialogConfigBean dialogConfigBean;
@@ -386,8 +391,8 @@ public class DialogBuilder {
         return this;
     }
 
-    public DialogBuilder setDefClick(IDialogDefClick iDialogDefClick) {
-        dialogConfigBean.setiDialogDefClick(iDialogDefClick);
+    public DialogBuilder setClick(IDialogClick iDialogClick) {
+        dialogConfigBean.setiDialogClick(iDialogClick);
         return this;
     }
 
@@ -482,11 +487,6 @@ public class DialogBuilder {
 
     public DialogBuilder setLine(boolean line) {
         dialogConfigBean.setLine(line);
-        return this;
-    }
-
-    public DialogBuilder setClick(IDialogListClick iDialogListClick) {
-        dialogConfigBean.setiDialogListClick(iDialogListClick);
         return this;
     }
 

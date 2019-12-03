@@ -1,6 +1,4 @@
-package com.mul.dialog;
-
-import android.content.res.Resources;
+package com.mul.dialog.click;
 
 /**
  * @ProjectName: MulDialog
@@ -14,10 +12,5 @@ import android.content.res.Resources;
  * @UpdateRemark: 更新说明
  * @Version: 1.0.0
  */
-public class ScreenUtils {
-    public static int px(float dipValue) {
-        Resources r = Resources.getSystem();
-        final float scale = r.getDisplayMetrics().scaledDensity;
-        return (int) (dipValue * scale + 0.5f);
-    }
+public class IDialogTouchClick {
 }

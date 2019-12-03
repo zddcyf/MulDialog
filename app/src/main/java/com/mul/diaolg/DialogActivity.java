@@ -94,7 +94,7 @@ public class DialogActivity extends AppCompatActivity {
 //                        .setContent("搜索正在加紧研发中")
 //                        .setSubmitBold(true)
 //                        .setCanAndConBold(true)
-//                        .setClick(new IDialogDefAllClick() {
+//                        .setClick(new IDialogAllClick() {
 //                            @Override
 //                            public void cancelClick(View v) {
 //

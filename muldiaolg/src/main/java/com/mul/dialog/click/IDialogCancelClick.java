@@ -1,6 +1,6 @@
-package com.mul.dialog;
+package com.mul.dialog.click;
 
-import android.content.res.Resources;
+import android.view.View;
 
 /**
  * @ProjectName: MulDialog
@@ -14,10 +14,11 @@ import android.content.res.Resources;
  * @UpdateRemark: 更新说明
  * @Version: 1.0.0
  */
-public class ScreenUtils {
-    public static int px(float dipValue) {
-        Resources r = Resources.getSystem();
-        final float scale = r.getDisplayMetrics().scaledDensity;
-        return (int) (dipValue * scale + 0.5f);
-    }
+public interface IDialogCancelClick extends IDialogClick {
+    /**
+     * 取消按钮的点击事件
+     *
+     * @param v
+     */
+    void cancelClick(View v);
 }

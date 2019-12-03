@@ -1,10 +1,16 @@
 package com.mul.dialog.bean;
 
 /**
- * Created by 盈东科技
- * on 2018/11/26
- * at 14:40
- * summary:
+ * @ProjectName: MulDialog
+ * @Package: com.mul.dialog.click
+ * @ClassName: IDialogTouchClick
+ * @Author: zdd
+ * @CreateDate: 2019/12/3 20:59
+ * @Description: 列表弹框的配置信息
+ * @UpdateUser: 更新者
+ * @UpdateDate: 2019/12/3 20:59
+ * @UpdateRemark: 更新说明
+ * @Version: 1.0.0
  */
 public class DialogListBean {
     /**

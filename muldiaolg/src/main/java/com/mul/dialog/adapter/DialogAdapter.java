@@ -15,18 +15,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mul.dialog.bean.DialogConfigBean;
+import com.mul.dialog.click.IDialogCancelClick;
 import com.mul.dialog.constant.DialogListTopEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.bean.DialogListBean;
-import com.mul.dialog.click.list.IDialogListCancelClick;
 import com.mul.dialog.muldiaolg.R;
 
 /**
- * Created by 盈东科技
- * on 2018/11/26
- * at 14:39
- * summary:
+ * @ProjectName: MulDialog
+ * @Package: com.mul.dialog.click
+ * @ClassName: IDialogTouchClick
+ * @Author: zdd
+ * @CreateDate: 2019/12/3 20:59
+ * @Description: 弹框的adapter
+ * @UpdateUser: 更新者
+ * @UpdateDate: 2019/12/3 20:59
+ * @UpdateRemark: 更新说明
+ * @Version: 1.0.0
  */
 public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHolder> {
 
@@ -184,13 +190,10 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
             setBold(holder.topView, dialogListBean.isTopBold());
             setBold(holder.bottomView, dialogListBean.isBottomBold());
             holder.viewGroup.setTag(holder.topView.getText().toString());
-            holder.viewGroup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    cmDialog.dismiss();
-                    if (null != mDialogConfigBean.getiDialogListClick()) {
-                        mDialogConfigBean.getiDialogListClick().btnClick(v, position);
-                    }
+            holder.viewGroup.setOnClickListener(v -> {
+                cmDialog.dismiss();
+                if (null != mDialogConfigBean.getiDialogClick()) {
+                    mDialogConfigBean.getiDialogClick().confirmClick(v, position);
                 }
             });
 
@@ -211,13 +214,10 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
             holder.cancel.setTextColor(mContext.getResources().getColor(mDialogConfigBean.getCancelColor() == -1 ? R.color.color_505050 : mDialogConfigBean.getCancelColor()));
             holder.cancel.setGravity(Gravity.CENTER);
             setBold(holder.cancel, mDialogConfigBean.isBottomCanCel());
-            holder.viewGroup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    cmDialog.dismiss();
-                    if (null != mDialogConfigBean.getiDialogListClick() && mDialogConfigBean.getiDialogListClick() instanceof IDialogListCancelClick) {
-                        ((IDialogListCancelClick) mDialogConfigBean.getiDialogListClick()).cancelClick(v);
-                    }
+            holder.viewGroup.setOnClickListener(v -> {
+                cmDialog.dismiss();
+                if (null != mDialogConfigBean.getiDialogClick() && mDialogConfigBean.getiDialogClick() instanceof IDialogCancelClick) {
+                    ((IDialogCancelClick) mDialogConfigBean.getiDialogClick()).cancelClick(v);
                 }
             });
         }

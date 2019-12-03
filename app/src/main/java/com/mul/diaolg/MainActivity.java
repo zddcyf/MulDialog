@@ -7,12 +7,12 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.mul.dialog.click.IDialogAllClick;
+import com.mul.dialog.click.IDialogCancelClick;
 import com.mul.dialog.constant.DialogPositionEnum;
 import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.bean.DialogListBean;
-import com.mul.dialog.click.def.IDialogDefAllClick;
-import com.mul.dialog.click.list.IDialogListCancelClick;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                         .setContent("搜索正在加紧研发中")
                         .setSubmitBold(true)
                         .setCanAndConBold(true)
-                        .setDefClick(new IDialogDefAllClick() {
+                        .setClick(new IDialogAllClick() {
                             @Override
                             public void cancelClick(View v) {
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void confirmClick(View v) {
+                            public void confirmClick(View v, int position) {
 
                             }
                         }).create();
@@ -59,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
                         .addData(new DialogListBean().setTop("男", true))
                         .addData(new DialogListBean().setTop("女", true))
                         .addData(new DialogListBean().setTop("中型", true))
-                        .setClick(new IDialogListCancelClick() {
+                        .setClick(new IDialogCancelClick() {
                             @Override
-                            public void cancelClick(View v) {
+                            public void confirmClick(View v, int position) {
 
                             }
 
                             @Override
-                            public void btnClick(View v, int position) {
+                            public void cancelClick(View v) {
 
                             }
                         }).create();
@@ -123,14 +123,9 @@ public class MainActivity extends AppCompatActivity {
                         .addData(new DialogListBean().setLineVisiable(false).setTop("新浪微博", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
                         .addData(new DialogListBean().setLineVisiable(false).setTop("复制链接", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
                         .addData(new DialogListBean().setLineVisiable(false).setTop("举报", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
-                        .setClick(new IDialogListCancelClick() {
+                        .setClick(new IDialogCancelClick() {
                             @Override
-                            public void cancelClick(View v) {
-
-                            }
-
-                            @Override
-                            public void btnClick(View v, int position) {
+                            public void confirmClick(View v, int position) {
                                 String tag = (String) v.getTag();
                                 switch (tag) {
                                     case "微信好友":
@@ -146,6 +141,11 @@ public class MainActivity extends AppCompatActivity {
                                     case "举报":
                                         break;
                                 }
+                            }
+
+                            @Override
+                            public void cancelClick(View v) {
+
                             }
                         })
                         .create();

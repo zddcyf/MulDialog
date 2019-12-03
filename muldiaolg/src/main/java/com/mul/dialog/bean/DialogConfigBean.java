@@ -3,8 +3,7 @@ package com.mul.dialog.bean;
 import android.content.Context;
 import android.view.Gravity;
 
-import com.mul.dialog.click.def.IDialogDefClick;
-import com.mul.dialog.click.list.IDialogListClick;
+import com.mul.dialog.click.IDialogClick;
 import com.mul.dialog.constant.DialogPositionEnum;
 import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.muldiaolg.R;
@@ -18,7 +17,7 @@ import java.util.List;
  * @ClassName: DialogConfigBean
  * @Author: zdd
  * @CreateDate: 2019/8/7 12:45
- * @Description: 类的作用描述
+ * @Description: 弹框的配置信息
  * @UpdateUser: 更新者
  * @UpdateDate: 2019/8/7 12:45
  * @UpdateRemark: 更新说明
@@ -78,7 +77,7 @@ public class DialogConfigBean {
     private boolean submitBold; // 是否对提示文字进行加粗处理
     private boolean contentBold; // 是否对内容文字进行加粗处理
     private boolean canAndConBold; // 是否对确认取消文字进行加粗处理
-    private IDialogDefClick iDialogDefClick;
+    private IDialogClick iDialogClick;
 
     /**
      * 设置列表弹框的数据源
@@ -106,7 +105,6 @@ public class DialogConfigBean {
     private boolean setHeight; // 是否设置item的高
     private int height; // item的高度
     private int cancelHeight; // item的高度
-    private IDialogListClick iDialogListClick;
 
     public Context getContext() {
         return mContext;
@@ -416,12 +414,12 @@ public class DialogConfigBean {
         this.canAndConBold = canAndConBold;
     }
 
-    public IDialogDefClick getiDialogDefClick() {
-        return iDialogDefClick;
+    public IDialogClick getiDialogClick() {
+        return iDialogClick;
     }
 
-    public void setiDialogDefClick(IDialogDefClick iDialogDefClick) {
-        this.iDialogDefClick = iDialogDefClick;
+    public void setiDialogClick(IDialogClick iDialogClick) {
+        this.iDialogClick = iDialogClick;
     }
 
     public List<DialogListBean> getDatas() {
@@ -556,19 +554,11 @@ public class DialogConfigBean {
         this.cancelHeight = cancelHeight;
     }
 
-    public IDialogListClick getiDialogListClick() {
-        return iDialogListClick;
-    }
-
     public boolean isLine() {
         return line;
     }
 
     public void setLine(boolean line) {
         this.line = line;
-    }
-
-    public void setiDialogListClick(IDialogListClick iDialogListClick) {
-        this.iDialogListClick = iDialogListClick;
     }
 }
