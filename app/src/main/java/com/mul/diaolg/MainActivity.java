@@ -15,6 +15,16 @@ import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.bean.DialogListBean;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +163,59 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .create();
                 break;
+        }
+    }
+
+    public static void getObjectAll(Object obj, JSONObject json) throws JSONException {
+        Method[] methods = obj.getClass().getMethods();
+        for (int i = 0; i < methods.length; i++) {
+            Method m = methods[i];
+            if (m.getName().startsWith("set")) {
+                if (m.getParameterTypes().length != 1) {
+                    continue;
+                }
+
+                if (m.getName().length() > 3) {
+                    String temp = m.getName().substring(3);
+                    String key = temp.toLowerCase();
+                    Object value = json.opt(key);
+                    if (value == null) {
+                        key = temp.substring(0, 1).toLowerCase() + temp.substring(1);
+                        value = json.opt(key);
+                    }
+                    if (m.getParameterTypes()[0].toString().endsWith("List")) {
+                        JSONArray jsonArray = new JSONArray(json.optString(key));
+                        ParameterizedType parameterizedType = (ParameterizedType) m.getGenericParameterTypes()[0];
+                        Class<?> actualTypeArgument = (Class<?>) parameterizedType.getActualTypeArguments()[0];
+                        List<Object> lists = new ArrayList<>();
+                        for (int j = 0; j < jsonArray.length(); j++) {
+                            Object list = null;
+                            try {
+                                list = actualTypeArgument.newInstance();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            getObjectAll(list, jsonArray.getJSONObject(j));
+                            lists.add(list);
+                        }
+                        try {
+                            m.invoke(obj, lists);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                        continue;
+                    }
+
+                    if (value != null) {
+                        try {
+                            m.invoke(obj, value);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+            }
         }
     }
 }
