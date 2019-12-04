@@ -1,5 +1,7 @@
 package com.mul.dialog.click;
 
+import android.view.View;
+
 /**
  * @ProjectName: MulDialog
  * @Package: com.mul.dialog.click
@@ -12,5 +14,11 @@ package com.mul.dialog.click;
  * @UpdateRemark: 更新说明
  * @Version: 1.0.0
  */
-public class IDialogTouchClick {
+public interface IDialogTouchClick {
+    /**
+     * 空白的点击事件
+     *
+     * @param v
+     */
+    void touchClick(View v);
 }

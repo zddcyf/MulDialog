@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                         .setContent("搜索正在加紧研发中")
                         .setSubmitBold(true)
                         .setCanAndConBold(true)
+                        .onTouch(v1 -> Log.i("mainActivity", "touch"))
                         .setClick(new IDialogAllClick() {
                             @Override
                             public void cancelClick(View v) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void touchClick(View v) {
-
+                                Log.i("mainActivity", "touchClick");
                             }
 
                             @Override
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         .with(this)
                         .setDialogStyleEnum(-1)
                         .setLayoutId(R.layout.ac_rel_dialog_surr)
+                        .onTouch(v1 -> MulFragmentDialog.getInstance().dismiss())
                         .setCenterMargin(50, 50).create();
                 MulFragmentDialog.getInstance().configCustView(new MulFragmentDialog.ConfigView() {
                     @Override

@@ -150,6 +150,7 @@ public class MulFragmentDialog extends DialogFragment {
         layoutParams.setMargins(ScreenUtils.px(mDialogConfigBean.getCenterLeftMar()), ScreenUtils.px(mDialogConfigBean.getCenterTopMar())
                 , ScreenUtils.px(mDialogConfigBean.getCenterRightMar()), ScreenUtils.px(mDialogConfigBean.getCenterBottomMar()));
         mContentConslay.setLayoutParams(layoutParams);
+        setTouch();
         return mBgConslay;
     }
 
@@ -187,16 +188,19 @@ public class MulFragmentDialog extends DialogFragment {
         setDefParams();
     }
 
-    private void setDefClick() {
-        mContentConslay.setOnClickListener(v -> {
+    private void setTouch() {
+        mBgConslay.setOnClickListener(v -> {
             if (null != mDialogConfigBean.getiDialogClick()) {
                 if (mDialogConfigBean.getiDialogClick() instanceof IDialogAllClick) {
-                    dismiss();
                     ((IDialogAllClick) mDialogConfigBean.getiDialogClick()).touchClick(v);
                 }
+            } else if (null != mDialogConfigBean.getiDialogTouchClick()) {
+                mDialogConfigBean.getiDialogTouchClick().touchClick(v);
             }
         });
+    }
 
+    private void setDefClick() {
         mCancel.setOnClickListener(v -> {
             if (null != mDialogConfigBean.getiDialogClick()) {
                 dismiss();
@@ -463,13 +467,7 @@ public class MulFragmentDialog extends DialogFragment {
     }
 
     public DialogBuilder builder() {
-        /**
-         * 因为是单例。所以需要在初始化的时候主动清理掉缓存信息
-         */
-        if (null != mDialogConfigBean && null != mDialogConfigBean.getDatas() && mDialogConfigBean.getDatas().size() > 0) {
-            mDialogConfigBean.getDatas().clear();
-        }
-        return DialogBuilder.builder();
+        return new DialogBuilder();
     }
 
     public static MulFragmentDialog getInstance() {

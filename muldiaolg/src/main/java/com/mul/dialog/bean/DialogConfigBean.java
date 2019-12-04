@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.Gravity;
 
 import com.mul.dialog.click.IDialogClick;
+import com.mul.dialog.click.IDialogTouchClick;
 import com.mul.dialog.constant.DialogPositionEnum;
 import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.muldiaolg.R;
@@ -77,7 +78,8 @@ public class DialogConfigBean {
     private boolean submitBold; // 是否对提示文字进行加粗处理
     private boolean contentBold; // 是否对内容文字进行加粗处理
     private boolean canAndConBold; // 是否对确认取消文字进行加粗处理
-    private IDialogClick iDialogClick;
+    private IDialogClick iDialogClick; // 点击事件
+    private IDialogTouchClick iDialogTouchClick;
 
     /**
      * 设置列表弹框的数据源
@@ -420,6 +422,14 @@ public class DialogConfigBean {
 
     public void setiDialogClick(IDialogClick iDialogClick) {
         this.iDialogClick = iDialogClick;
+    }
+
+    public IDialogTouchClick getiDialogTouchClick() {
+        return iDialogTouchClick;
+    }
+
+    public void setiDialogTouchClick(IDialogTouchClick iDialogTouchClick) {
+        this.iDialogTouchClick = iDialogTouchClick;
     }
 
     public List<DialogListBean> getDatas() {

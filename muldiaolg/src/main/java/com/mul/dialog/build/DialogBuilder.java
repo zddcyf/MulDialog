@@ -9,6 +9,7 @@ import android.util.Log;
 import com.mul.dialog.bean.DialogConfigBean;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.click.IDialogClick;
+import com.mul.dialog.click.IDialogTouchClick;
 import com.mul.dialog.dialog.MulFragmentDialog;
 
 import java.util.List;
@@ -28,17 +29,9 @@ import java.util.List;
 public class DialogBuilder {
     private DialogConfigBean dialogConfigBean;
 
-    private DialogBuilder() {
+    public DialogBuilder() {
         Log.i("初始化成功", ":::dialogConfigBean");
         dialogConfigBean = new DialogConfigBean();
-    }
-
-    public static DialogBuilder builder() {
-        return DialogBuilderHolder.DIALOG_BUILDER;
-    }
-
-    private static class DialogBuilderHolder {
-        private static final DialogBuilder DIALOG_BUILDER = new DialogBuilder();
     }
 
     public DialogBuilder with(Activity mContext) {
@@ -393,6 +386,11 @@ public class DialogBuilder {
 
     public DialogBuilder setClick(IDialogClick iDialogClick) {
         dialogConfigBean.setiDialogClick(iDialogClick);
+        return this;
+    }
+
+    public DialogBuilder onTouch(IDialogTouchClick iDialogTouchClick) {
+        dialogConfigBean.setiDialogTouchClick(iDialogTouchClick);
         return this;
     }
 
