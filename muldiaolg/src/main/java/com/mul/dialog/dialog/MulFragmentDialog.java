@@ -466,18 +466,6 @@ public class MulFragmentDialog extends DialogFragment {
         this.configView = configView;
     }
 
-    public DialogBuilder builder() {
-        return new DialogBuilder();
-    }
-
-    public static MulFragmentDialog getInstance() {
-        return MulFragmentDialogHolder.mulFragmentDialog;
-    }
-
-    private static class MulFragmentDialogHolder {
-        private static final MulFragmentDialog mulFragmentDialog = new MulFragmentDialog();
-    }
-
     public interface ConfigView {
         void configCustView(View v);
     }

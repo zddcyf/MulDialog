@@ -11,6 +11,7 @@ import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.click.IDialogClick;
 import com.mul.dialog.click.IDialogTouchClick;
 import com.mul.dialog.dialog.MulFragmentDialog;
+import com.mul.dialog.proxy.DialogProxy;
 
 import java.util.List;
 
@@ -488,9 +489,8 @@ public class DialogBuilder {
         return this;
     }
 
-    public MulFragmentDialog create() {
-        MulFragmentDialog.getInstance().setBuilder(dialogConfigBean);
-        MulFragmentDialog.getInstance().show(((Activity) dialogConfigBean.getContext()).getFragmentManager(), "弹框");
-        return MulFragmentDialog.getInstance();
+    public void create() {
+        DialogProxy.obtain().getDialogFragment().setBuilder(dialogConfigBean);
+        DialogProxy.obtain().getDialogFragment().show(((Activity) dialogConfigBean.getContext()).getFragmentManager(), "弹框");
     }
 }

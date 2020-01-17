@@ -14,6 +14,7 @@ import com.mul.dialog.constant.DialogPositionEnum;
 import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.bean.DialogListBean;
+import com.mul.dialog.proxy.DialogProxy;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.text1:
-                MulFragmentDialog.getInstance().builder()
+                DialogProxy.obtain().builder()
                         .with(this)
                         .setDialogStyleEnum(DialogStyleEnum.def.getCode())
                         .setDialogPositionEnum(DialogPositionEnum.center.getCode())
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         }).create();
                 break;
             case R.id.text2:
-                MulFragmentDialog.getInstance().builder()
+                DialogProxy.obtain().builder()
                         .with(this)
                         .setDialogStyleEnum(DialogStyleEnum.list.getCode())
                         .setDialogPositionEnum(DialogPositionEnum.bottom.getCode())
@@ -84,13 +85,13 @@ public class MainActivity extends AppCompatActivity {
                         }).create();
                 break;
             case R.id.text3:
-                MulFragmentDialog.getInstance().builder()
+                DialogProxy.obtain().builder()
                         .with(this)
                         .setDialogStyleEnum(-1)
                         .setLayoutId(R.layout.ac_rel_dialog_surr)
-                        .onTouch(v1 -> MulFragmentDialog.getInstance().dismiss())
+                        .onTouch(v1 -> DialogProxy.obtain().dismiss())
                         .setCenterMargin(50, 50).create();
-                MulFragmentDialog.getInstance().configCustView(new MulFragmentDialog.ConfigView() {
+                DialogProxy.obtain().configCustView(new MulFragmentDialog.ConfigView() {
                     @Override
                     public void configCustView(View v) {
                         v.setOnClickListener(new View.OnClickListener() {
@@ -108,20 +109,20 @@ public class MainActivity extends AppCompatActivity {
                         cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                MulFragmentDialog.getInstance().dismiss();
+                                DialogProxy.obtain().dismiss();
                             }
                         });
                         confirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                MulFragmentDialog.getInstance().dismiss();
+                                DialogProxy.obtain().dismiss();
                             }
                         });
                     }
                 });
                 break;
             case R.id.text4:
-                MulFragmentDialog.getInstance().builder()
+                DialogProxy.obtain().builder()
                         .with(this)
                         .setDialogStyleEnum(DialogStyleEnum.recy.getCode())
                         .setColumns(4)
