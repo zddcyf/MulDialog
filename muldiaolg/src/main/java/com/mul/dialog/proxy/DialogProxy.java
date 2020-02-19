@@ -18,6 +18,7 @@ import com.mul.dialog.dialog.MulFragmentDialog;
 public class DialogProxy {
     private DialogBuilder dialogBuilder;
     private MulFragmentDialog dialogFragment;
+
     private DialogProxy() {
 
     }
@@ -35,6 +36,10 @@ public class DialogProxy {
     }
 
     public DialogBuilder builder() {
+        if (null != dialogFragment) {
+            dialogFragment.dismiss();
+            dialogFragment = null;
+        }
         dialogBuilder = new DialogBuilder();
         dialogFragment = new MulFragmentDialog();
         return dialogBuilder;
