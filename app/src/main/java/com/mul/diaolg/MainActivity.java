@@ -31,66 +31,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DialogProxy.obtain().builder()
-                .with(this)
-                .setDialogStyleEnum(-1)
-                .setLayoutId(R.layout.ac_rel_dialog_surr)
-                .onTouch(v1 -> DialogProxy.obtain().dismiss())
-                .setCenterMargin(50, 50).create();
-        DialogProxy.obtain().configCustView(new MulFragmentDialog.ConfigView() {
-            @Override
-            public void configCustView(View v) {
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (v.getId() == R.id.mulView) {
-                            Toast.makeText(MainActivity.this, "我是设置后的总布局", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                AppCompatTextView submit = v.findViewById(R.id.submit);
-                AppCompatTextView cancel = v.findViewById(R.id.cancel);
-                AppCompatTextView confirm = v.findViewById(R.id.confirm);
-                final AppCompatEditText content = v.findViewById(R.id.content);
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DialogProxy.obtain().dismiss();
-                    }
-                });
-                confirm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DialogProxy.obtain().dismiss();
-                    }
-                });
-            }
-        });
-        DialogProxy.obtain().builder()
-                .with(this)
-                .setDialogStyleEnum(DialogStyleEnum.def.getCode())
-                .setDialogPositionEnum(DialogPositionEnum.center.getCode())
-                .setCenterMargin(50, 50)
-                .setContent("搜索正在加紧研发中")
-                .setSubmitBold(true)
-                .setCanAndConBold(true)
-                .onTouch(v1 -> Log.i("mainActivity", "touch"))
-                .setClick(new IDialogAllClick() {
-                    @Override
-                    public void cancelClick(View v) {
-
-                    }
-
-                    @Override
-                    public void touchClick(View v) {
-                        Log.i("mainActivity", "touchClick");
-                    }
-
-                    @Override
-                    public void confirmClick(View v, int position) {
-
-                    }
-                }).create();
     }
 
     public void onClick(View v) {

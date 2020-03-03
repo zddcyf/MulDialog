@@ -127,8 +127,13 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
              */
             if (mDialogConfigBean.getTopViewGroupBg() == -1) {
                 if (position == 0) {
-                    holder.viewGroup.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getTopViewGroupBgStart() == -1 ? R.drawable.dialog_list_bg_start : mDialogConfigBean.getTopViewGroupBgStart()));
-                    holder.lineView.setVisibility(View.VISIBLE);
+                    if (mDialogConfigBean.getDatas().size() == 1) {
+                        holder.viewGroup.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getTopViewGroupBgStart() == -1 ? R.drawable.dialog_list_bg_cancel : mDialogConfigBean.getTopViewGroupBgStart()));
+                        holder.lineView.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.viewGroup.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getTopViewGroupBgStart() == -1 ? R.drawable.dialog_list_bg_start : mDialogConfigBean.getTopViewGroupBgStart()));
+                        holder.lineView.setVisibility(View.VISIBLE);
+                    }
                 } else if (position == mDialogConfigBean.getDatas().size() - 1) {
                     holder.viewGroup.setBackground(mContext.getResources().getDrawable(mDialogConfigBean.getTopViewGroupBgEnd() == -1 ? R.drawable.dialog_list_bg_end : mDialogConfigBean.getTopViewGroupBgEnd()));
                     holder.lineView.setVisibility(View.GONE);
