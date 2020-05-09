@@ -218,7 +218,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
             holder.cancel.setTextSize(TypedValue.COMPLEX_UNIT_SP, mDialogConfigBean.getCancelSize() == -1 ? 18 : mDialogConfigBean.getCancelSize());
             holder.cancel.setTextColor(mContext.getResources().getColor(mDialogConfigBean.getCancelColor() == -1 ? R.color.color_505050 : mDialogConfigBean.getCancelColor()));
             holder.cancel.setGravity(Gravity.CENTER);
-            setBold(holder.cancel, mDialogConfigBean.isBottomCanCel());
+            setBold(holder.cancel, mDialogConfigBean.isCancelBold());
             holder.viewGroup.setOnClickListener(v -> {
                 cmDialog.dismiss();
                 if (null != mDialogConfigBean.getiDialogClick() && mDialogConfigBean.getiDialogClick() instanceof IDialogCancelClick) {
