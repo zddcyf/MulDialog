@@ -1,6 +1,7 @@
 package com.mul.dialog.dialog;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -96,15 +97,26 @@ public class MulFragmentDialog extends DialogFragment {
                 layoutParams.gravity = Gravity.CENTER; // 位置
             }
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;//宽度满屏
-            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;//高度满屏
+//            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;//高度满屏
+            layoutParams.height = getH(getActivity());//高度满屏
 
             window.setAttributes(layoutParams);
         }
     }
 
+    /**
+     * @return 手机屏幕的高度
+     */
+    public int getH(Context context){
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        return height;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
         mBgConslay = new RelativeLayout(mDialogConfigBean.getContext());
         mContentConslay = new ConstraintLayout(mDialogConfigBean.getContext());
         if (mDialogConfigBean.getDialogStyleEnum() == DialogStyleEnum.def.getCode()) {
@@ -151,6 +163,7 @@ public class MulFragmentDialog extends DialogFragment {
                 , ScreenUtils.px(mDialogConfigBean.getCenterRightMar()), ScreenUtils.px(mDialogConfigBean.getCenterBottomMar()));
         mContentConslay.setLayoutParams(layoutParams);
         setTouch();
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         return mBgConslay;
     }
 
@@ -186,6 +199,12 @@ public class MulFragmentDialog extends DialogFragment {
         mContentConslay.addView(mConfirm);
         mContentConslay.addView(mCanAndConCenterLine);
         setDefParams();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogFullScreen);
     }
 
     private void setTouch() {
