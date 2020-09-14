@@ -54,10 +54,11 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
             mContext = parent.getContext();
         }
         ConstraintLayout view = new ConstraintLayout(mContext);
-        view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
         if (viewType == CANCEL) {
+            view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
             createCancelView(view);
         } else {
+            view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, ScreenUtils.px(mDialogConfigBean.getHeight() == 0 ? RecyclerView.LayoutParams.WRAP_CONTENT : mDialogConfigBean.getHeight())));
             createView(view);
         }
         return new DialogHolder(view, viewType);
@@ -109,7 +110,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
         ConstraintSet bottomSet = new ConstraintSet();
         bottomSet.clone(view);
         bottomSet.constrainWidth(cancel.getId(), 0);
-        bottomSet.constrainHeight(cancel.getId(), ScreenUtils.px(mDialogConfigBean.getCancelHeight() == 0 ? 57 : mDialogConfigBean.getCancelHeight()));
+        bottomSet.constrainHeight(cancel.getId(), ScreenUtils.px(mDialogConfigBean.getCancelHeight() == 0 ? mDialogConfigBean.getHeight() == 0 ? 57 : mDialogConfigBean.getHeight() : mDialogConfigBean.getCancelHeight()));
         setId(bottomSet, cancel.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
         setId(bottomSet, cancel.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         setId(bottomSet, cancel.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);

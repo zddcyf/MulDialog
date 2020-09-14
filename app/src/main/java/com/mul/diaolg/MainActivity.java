@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                         .setDialogStyleEnum(DialogStyleEnum.list.getCode())
                         .setDialogPositionEnum(DialogPositionEnum.bottom.getCode())
                         .setCenterMargin(50, 50)
+                        .setCancelHeight(30)
+                        .setHeight(30)
                         .setCancel("取消", true)
                         .addData(new DialogListBean().setTop("男", true))
                         .addData(new DialogListBean().setTop("女", true))
