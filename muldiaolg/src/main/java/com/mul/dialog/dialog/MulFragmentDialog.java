@@ -2,6 +2,7 @@ package com.mul.dialog.dialog;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -98,10 +99,19 @@ public class MulFragmentDialog extends DialogFragment {
             }
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;//宽度满屏
 //            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;//高度满屏
-            layoutParams.height = getH(getActivity());//高度满屏
+            layoutParams.height = getH(getActivity()) - getStatusBarHeight();//高度满屏
 
             window.setAttributes(layoutParams);
         }
+    }
+
+    /**
+     * 获取状态栏高度
+     */
+    public int getStatusBarHeight() {
+        Resources resources = getActivity().getResources();
+        int resourceId = getActivity().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
     }
 
     /**
