@@ -486,7 +486,7 @@ public class DialogBuilder {
         if (null != mContext && mContext instanceof AppCompatActivity) {
             DialogProxy.obtain().getDialogFragment().show(((AppCompatActivity) mContext).getSupportFragmentManager(), "弹框");
         } else if (null != mFragment) {
-            DialogProxy.obtain().getDialogFragment().show(mFragment.getFragmentManager(), "弹框");
+            DialogProxy.obtain().getDialogFragment().show(mFragment.getChildFragmentManager(), "弹框");
         }
     }
 }
