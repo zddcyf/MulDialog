@@ -482,10 +482,12 @@ public class DialogBuilder {
     public void create() {
         Context mContext = dialogConfigBean.getContext();
         Fragment mFragment = dialogConfigBean.getFragment();
-        DialogProxy.obtain().getDialogFragment().setBuilder(dialogConfigBean);
         if (null != mContext && mContext instanceof AppCompatActivity) {
+            DialogProxy.obtain().getDialogFragment().setBuilder(dialogConfigBean);
             DialogProxy.obtain().getDialogFragment().show(((AppCompatActivity) mContext).getSupportFragmentManager(), "弹框");
         } else if (null != mFragment) {
+            dialogConfigBean.setContext(mFragment.getActivity());
+            DialogProxy.obtain().getDialogFragment().setBuilder(dialogConfigBean);
             DialogProxy.obtain().getDialogFragment().show(mFragment.getChildFragmentManager(), "弹框");
         }
     }
