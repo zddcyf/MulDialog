@@ -27,8 +27,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':muldiaolg')
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["constraintLayout"]
-    implementation rootProject.ext.dependencies["recyclerview"]
+    implementation rootProject.ext.dependencies["material"]
+//    implementation rootProject.ext.dependencies["recyclerview"]
+    implementation project(':muldiaolg')
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 }

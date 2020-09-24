@@ -3,6 +3,8 @@ package com.mul.dialog.bean;
 import android.content.Context;
 import android.view.Gravity;
 
+import androidx.fragment.app.Fragment;
+
 import com.mul.dialog.click.IDialogClick;
 import com.mul.dialog.click.IDialogTouchClick;
 import com.mul.dialog.constant.DialogPositionEnum;
@@ -26,6 +28,7 @@ import java.util.List;
  */
 public class DialogConfigBean {
     private Context mContext; // 必填
+    private Fragment mFragmentX; // 必填
     /**
      * 整体部分的配置
      */
@@ -114,6 +117,14 @@ public class DialogConfigBean {
 
     public void setContext(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public Fragment getFragment() {
+        return mFragmentX;
+    }
+
+    public void setFragment(Fragment mFragmentX) {
+        this.mFragmentX = mFragmentX;
     }
 
     public int getLayoutId() {

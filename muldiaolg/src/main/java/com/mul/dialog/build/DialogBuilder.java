@@ -1,16 +1,16 @@
 package com.mul.dialog.build;
 
-import android.app.Activity;
 import android.app.Application;
-import android.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.mul.dialog.bean.DialogConfigBean;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.click.IDialogClick;
 import com.mul.dialog.click.IDialogTouchClick;
-import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.proxy.DialogProxy;
 
 import java.util.List;
@@ -35,23 +35,13 @@ public class DialogBuilder {
         dialogConfigBean = new DialogConfigBean();
     }
 
-    public DialogBuilder with(Activity mContext) {
-        dialogConfigBean.setContext(mContext);
-        return this;
-    }
-
     public DialogBuilder with(AppCompatActivity mContext) {
         dialogConfigBean.setContext(mContext);
         return this;
     }
 
     public DialogBuilder with(Fragment mContext) {
-        dialogConfigBean.setContext(mContext.getActivity());
-        return this;
-    }
-
-    public DialogBuilder with(android.support.v4.app.Fragment mContext) {
-        dialogConfigBean.setContext(mContext.getActivity());
+        dialogConfigBean.setFragment(mContext);
         return this;
     }
 
@@ -490,7 +480,13 @@ public class DialogBuilder {
     }
 
     public void create() {
+        Context mContext = dialogConfigBean.getContext();
+        Fragment mFragment = dialogConfigBean.getFragment();
         DialogProxy.obtain().getDialogFragment().setBuilder(dialogConfigBean);
-        DialogProxy.obtain().getDialogFragment().show(((Activity) dialogConfigBean.getContext()).getFragmentManager(), "弹框");
+        if (null != mContext && mContext instanceof AppCompatActivity) {
+            DialogProxy.obtain().getDialogFragment().show(((AppCompatActivity) mContext).getSupportFragmentManager(), "弹框");
+        } else if (null != mFragment) {
+            DialogProxy.obtain().getDialogFragment().show(mFragment.getFragmentManager(), "弹框");
+        }
     }
 }

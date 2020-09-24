@@ -1,17 +1,9 @@
 package com.mul.dialog.dialog;
 
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -23,10 +15,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.adapter.DialogAdapter;
 import com.mul.dialog.bean.DialogConfigBean;
-import com.mul.dialog.build.DialogBuilder;
 import com.mul.dialog.click.IDialogAllClick;
 import com.mul.dialog.click.IDialogCancelClick;
 import com.mul.dialog.constant.DialogPositionEnum;
