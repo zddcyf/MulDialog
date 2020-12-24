@@ -7,10 +7,10 @@ ext {
             "compileSdkVersion": 29,
             "buildToolsVersion": "29.0.3",
             "applicationId"    : "com.mul.diaolg",
-            "minSdkVersion"    : 24,
+            "minSdkVersion"    : 21,
             "targetSdkVersion" : 29,
-            "versionCode"      : 3,
-            "versionName"      : "1.0.2"
+            "versionCode"      : 1,
+            "versionName"      : "v1.0.0-beta"
     ]
 
     dependencies = [
