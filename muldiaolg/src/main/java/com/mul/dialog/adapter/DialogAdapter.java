@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mul.dialog.bean.DialogConfigBean;
 import com.mul.dialog.click.IDialogCancelClick;
-import com.mul.dialog.constant.DialogListTopEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.ScreenUtils;
 import com.mul.dialog.bean.DialogListBean;
@@ -162,7 +161,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
                     , ScreenUtils.px(dialogListBean.getTopPaddTop())
                     , ScreenUtils.px(dialogListBean.getTopPaddRight())
                     , ScreenUtils.px(dialogListBean.getTopPaddBottom()));
-            setTextGrivate(holder.topView, dialogListBean.getDialogListTopGrivate());
+            setTextGravity(holder.topView, dialogListBean.getDialogListTopGrivate());
 
             /**
              * 设置下面的view
@@ -176,7 +175,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
                         , ScreenUtils.px(dialogListBean.getBottomPaddTop())
                         , ScreenUtils.px(dialogListBean.getBottomPaddRight())
                         , ScreenUtils.px(dialogListBean.getBottomPaddBottom()));
-                setTextGrivate(holder.bottomView, dialogListBean.getBottomGrivate());
+                setTextGravity(holder.bottomView, dialogListBean.getBottomGrivate());
             } else {
                 holder.bottomView.setVisibility(View.GONE);
                 if (dialogListBean.getUnSelectImage() == -1)
@@ -254,13 +253,8 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
         constraintSet.connect(id, startSide, endId, endSide);
     }
 
-    private void setTextGrivate(AppCompatTextView topView, int topGrivate) {
-        topView.setGravity(topGrivate == DialogListTopEnum.bottom.getCode() ? Gravity.BOTTOM
-                : topGrivate == DialogListTopEnum.top.getCode() ? Gravity.TOP
-                : topGrivate == DialogListTopEnum.left.getCode() ? Gravity.LEFT
-                : topGrivate == DialogListTopEnum.right.getCode() ? Gravity.RIGHT
-                : topGrivate == DialogListTopEnum.center.getCode() ? Gravity.CENTER
-                : Gravity.CENTER);
+    private void setTextGravity(AppCompatTextView topView, int gravity) {
+        topView.setGravity(gravity);
     }
 
     @Override
