@@ -81,7 +81,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
 
         ConstraintSet topSet = new ConstraintSet();
         topSet.clone(view);
-        topSet.constrainWidth(topView.getId(), ConstraintSet.WRAP_CONTENT);
+        topSet.constrainWidth(topView.getId(), ConstraintSet.MATCH_CONSTRAINT);
         topSet.constrainHeight(topView.getId(), ConstraintSet.WRAP_CONTENT);
         setId(topSet, topView.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP);
         setId(topSet, topView.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
@@ -157,11 +157,11 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
             holder.topView.setText(dialogListBean.getTopStr());
             holder.topView.setTextColor(mContext.getResources().getColor(dialogListBean.getTopColor() == -1 ? R.color.color_007AFF : dialogListBean.getTopColor()));
             holder.topView.setTextSize(TypedValue.COMPLEX_UNIT_SP, dialogListBean.getTopSize() == -1 ? 18 : dialogListBean.getTopSize());
-            holder.topView.setPadding(ScreenUtils.px(dialogListBean.getTopPaddLeft())
-                    , ScreenUtils.px(dialogListBean.getTopPaddTop())
-                    , ScreenUtils.px(dialogListBean.getTopPaddRight())
-                    , ScreenUtils.px(dialogListBean.getTopPaddBottom()));
-            setTextGravity(holder.topView, dialogListBean.getDialogListTopGrivate());
+            holder.topView.setPadding(ScreenUtils.px(dialogListBean.getTopPaddingLeft())
+                    , ScreenUtils.px(dialogListBean.getTopPaddingTop())
+                    , ScreenUtils.px(dialogListBean.getTopPaddingRight())
+                    , ScreenUtils.px(dialogListBean.getTopPaddingBottom()));
+            setTextGravity(holder.topView, dialogListBean.getTopGravity());
 
             /**
              * 设置下面的view
@@ -171,11 +171,11 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
                 holder.bottomView.setText(dialogListBean.getBottomStr());
                 holder.bottomView.setTextColor(mContext.getResources().getColor(dialogListBean.getBottomColor() == -1 ? R.color.color_007AFF : dialogListBean.getBottomColor()));
                 holder.bottomView.setTextSize(TypedValue.COMPLEX_UNIT_SP, dialogListBean.getBottomSize() == -1 ? 18 : dialogListBean.getBottomSize());
-                holder.bottomView.setPadding(ScreenUtils.px(dialogListBean.getBottomPaddLeft())
-                        , ScreenUtils.px(dialogListBean.getBottomPaddTop())
-                        , ScreenUtils.px(dialogListBean.getBottomPaddRight())
-                        , ScreenUtils.px(dialogListBean.getBottomPaddBottom()));
-                setTextGravity(holder.bottomView, dialogListBean.getBottomGrivate());
+                holder.bottomView.setPadding(ScreenUtils.px(dialogListBean.getBottomPaddingLeft())
+                        , ScreenUtils.px(dialogListBean.getBottomPaddingTop())
+                        , ScreenUtils.px(dialogListBean.getBottomPaddingRight())
+                        , ScreenUtils.px(dialogListBean.getBottomPaddingBottom()));
+                setTextGravity(holder.bottomView, dialogListBean.getBottomGravity());
             } else {
                 holder.bottomView.setVisibility(View.GONE);
                 if (dialogListBean.getUnSelectImage() == -1)
@@ -188,10 +188,10 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
                 holder.imageView.setVisibility(View.VISIBLE);
                 holder.imageView.setImageResource(dialogListBean.getUnSelectImage());
                 setImageView(holder);
-                holder.imageView.setPadding(ScreenUtils.px(dialogListBean.getImgPaddLeft())
-                        , ScreenUtils.px(dialogListBean.getImgPaddTop())
-                        , ScreenUtils.px(dialogListBean.getImgPaddRight())
-                        , ScreenUtils.px(dialogListBean.getImgPaddBottom()));
+                holder.imageView.setPadding(ScreenUtils.px(dialogListBean.getImgPaddingLeft())
+                        , ScreenUtils.px(dialogListBean.getImgPaddingTop())
+                        , ScreenUtils.px(dialogListBean.getImgPaddingRight())
+                        , ScreenUtils.px(dialogListBean.getImgPaddingBottom()));
             }
             setBold(holder.topView, dialogListBean.isTopBold());
             setBold(holder.bottomView, dialogListBean.isBottomBold());
@@ -207,7 +207,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
              * 设置线
              */
             holder.lineView.setBackgroundColor(mContext.getResources().getColor(mDialogConfigBean.getLineColor() == -1 ? R.color.color_774D4D4D : mDialogConfigBean.getLineColor()));
-            if (dialogListBean.isLineVisiable()) {
+            if (dialogListBean.isLineVisible()) {
                 holder.lineView.setVisibility(View.VISIBLE);
             } else {
                 holder.lineView.setVisibility(View.GONE);
@@ -254,7 +254,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
     }
 
     private void setTextGravity(AppCompatTextView topView, int gravity) {
-        topView.setGravity(gravity);
+        topView.setGravity(gravity == -1 ? Gravity.CENTER : gravity);
     }
 
     @Override

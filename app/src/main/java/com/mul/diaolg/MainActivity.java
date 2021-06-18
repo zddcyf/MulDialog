@@ -2,6 +2,7 @@ package com.mul.diaolg;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -73,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
                         .setCancelHeight(30)
                         .setHeight(30)
                         .setCancel("取消", true)
-                        .addData(new DialogListBean().setTop("男", true))
+                        .addData(new DialogListBean().setTop("男", true, Gravity.CENTER_VERTICAL)
+                        .setTopPaddingLeft(100))
                         .addData(new DialogListBean().setTop("女", true))
                         .addData(new DialogListBean().setTop("中型", true))
                         .setClick(new IDialogCancelClick() {
@@ -135,12 +137,12 @@ public class MainActivity extends AppCompatActivity {
                         .setCancel("取消", 16, R.color.color_323232, true)
                         .setCancelPadd(0, 0)
                         .setCenterMargin(0, 0)
-                        .addData(new DialogListBean().setLineVisiable(false).setTop("微信好友", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
-                        .addData(new DialogListBean().setLineVisiable(false).setTop("朋友圈", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
-                        .addData(new DialogListBean().setLineVisiable(false).setTop("QQ好友", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
-                        .addData(new DialogListBean().setLineVisiable(false).setTop("新浪微博", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
-                        .addData(new DialogListBean().setLineVisiable(false).setTop("复制链接", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
-                        .addData(new DialogListBean().setLineVisiable(false).setTop("举报", 12, R.color.color_505050).setTopPaddTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddTop(15))
+                        .addData(new DialogListBean().setLineVisible(false).setTop("微信好友", 12, R.color.color_505050).setTopPaddingTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddingTop(15))
+                        .addData(new DialogListBean().setLineVisible(false).setTop("朋友圈", 12, R.color.color_505050).setTopPaddingTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddingTop(15))
+                        .addData(new DialogListBean().setLineVisible(false).setTop("QQ好友", 12, R.color.color_505050).setTopPaddingTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddingTop(15))
+                        .addData(new DialogListBean().setLineVisible(false).setTop("新浪微博", 12, R.color.color_505050).setTopPaddingTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddingTop(15))
+                        .addData(new DialogListBean().setLineVisible(false).setTop("复制链接", 12, R.color.color_505050).setTopPaddingTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddingTop(15))
+                        .addData(new DialogListBean().setLineVisible(false).setTop("举报", 12, R.color.color_505050).setTopPaddingTB(15, 7).setUnSelectImage(R.mipmap.ic_launcher).setImgPaddingTop(15))
                         .setClick(new IDialogCancelClick() {
                             @Override
                             public void confirmClick(View v, int position) {

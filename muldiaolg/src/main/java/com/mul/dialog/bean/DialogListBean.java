@@ -20,8 +20,8 @@ public class DialogListBean {
     private boolean topBold;
     private int topSize = -1;
     private int topColor = -1;
-    private int dialogListTopGrivate = 10;
-    private int topPaddLeft, topPaddTop, topPaddRight, topPaddBottom;
+    private int topGravity = -1;
+    private int topPaddingLeft, topPaddingTop, topPaddingRight, topPaddingBottom;
 
     /**
      * 设置下面的textview
@@ -30,26 +30,26 @@ public class DialogListBean {
     private boolean bottomBold;
     private int bottomSize;
     private int bottomColor;
-    private int bottomGrivate;
-    private int bottomPaddLeft, bottomPaddTop, bottomPaddRight, bottomPaddBottom;
+    private int bottomGravity = -1;
+    private int bottomPaddingLeft, bottomPaddingTop, bottomPaddingRight, bottomPaddingBottom;
 
     /**
      * 设置图片
      */
     private int imageWidth = 0, imageHeight = 0;
-    private int imageGrivate;
+    private int imageGravity;
     private int selectImage = -1;
     private int unSelectImage = -1;
-    private int imgPaddLeft, imgPaddTop, imgPaddRight, imgPaddBottom;
+    private int imgPaddingLeft, imgPaddingTop, imgPaddingRight, imgPaddingBottom;
 
-    private boolean lineVisiable = true;
+    private boolean lineVisible = true;
 
-    public boolean isLineVisiable() {
-        return lineVisiable;
+    public boolean isLineVisible() {
+        return lineVisible;
     }
 
-    public DialogListBean setLineVisiable(boolean lineVisiable) {
-        this.lineVisiable = lineVisiable;
+    public DialogListBean setLineVisible(boolean lineVisible) {
+        this.lineVisible = lineVisible;
         return this;
     }
 
@@ -80,19 +80,19 @@ public class DialogListBean {
         return this;
     }
 
-    public int getDialogListTopGrivate() {
-        return dialogListTopGrivate;
+    public int getTopGravity() {
+        return topGravity;
     }
 
-    public DialogListBean setDialogListTopGrivate(int dialogListTopGrivate) {
-        this.dialogListTopGrivate = dialogListTopGrivate;
+    public DialogListBean setTopGravity(int dialogListTopGravity) {
+        this.topGravity = dialogListTopGravity;
         return this;
     }
 
-    public DialogListBean setTop(String topStr, boolean topBold, int topGrivate) {
+    public DialogListBean setTop(String topStr, boolean topBold, int topGravity) {
         this.topStr = topStr;
         this.topBold = topBold;
-        this.dialogListTopGrivate = topGrivate;
+        this.topGravity = topGravity;
         return this;
     }
 
@@ -117,32 +117,32 @@ public class DialogListBean {
         return this;
     }
 
-    public DialogListBean setTop(String topStr, boolean topBold, int topSize, int topColor, int topGrivate) {
+    public DialogListBean setTop(String topStr, boolean topBold, int topSize, int topColor, int topGravity) {
         this.topStr = topStr;
         this.topBold = topBold;
         this.topSize = topSize;
         this.topColor = topColor;
-        this.dialogListTopGrivate = topGrivate;
+        this.topGravity = topGravity;
         return this;
     }
 
-    public DialogListBean setTopPaddTB(int topPaddTop, int topPaddBottom) {
-        this.topPaddTop = topPaddTop;
-        this.topPaddBottom = topPaddBottom;
+    public DialogListBean setTopPaddingTB(int topPaddingTop, int topPaddingBottom) {
+        this.topPaddingTop = topPaddingTop;
+        this.topPaddingBottom = topPaddingBottom;
         return this;
     }
 
-    public DialogListBean setTopPaddLR(int topPaddLeft, int topPaddRight) {
-        this.topPaddLeft = topPaddLeft;
-        this.topPaddRight = topPaddRight;
+    public DialogListBean setTopPaddingLR(int topPaddingLeft, int topPaddingRight) {
+        this.topPaddingLeft = topPaddingLeft;
+        this.topPaddingRight = topPaddingRight;
         return this;
     }
 
-    public DialogListBean setTopPadd(int topPaddLeft, int topPaddTop, int topPaddRight, int topPaddBottom) {
-        this.topPaddLeft = topPaddLeft;
-        this.topPaddTop = topPaddTop;
-        this.topPaddRight = topPaddRight;
-        this.topPaddBottom = topPaddBottom;
+    public DialogListBean setTopPadding(int topPaddingLeft, int topPaddingTop, int topPaddingRight, int topPaddingBottom) {
+        this.topPaddingLeft = topPaddingLeft;
+        this.topPaddingTop = topPaddingTop;
+        this.topPaddingRight = topPaddingRight;
+        this.topPaddingBottom = topPaddingBottom;
         return this;
     }
 
@@ -167,12 +167,12 @@ public class DialogListBean {
         return this;
     }
 
-    public DialogListBean setBottom(String bottomStr, boolean bottomBold, int bottomSize, int bottomColor, int bottomGrivate) {
+    public DialogListBean setBottom(String bottomStr, boolean bottomBold, int bottomSize, int bottomColor, int bottomGravity) {
         this.bottomStr = bottomStr;
         this.bottomBold = bottomBold;
         this.bottomSize = bottomSize;
         this.bottomColor = bottomColor;
-        this.bottomGrivate = bottomGrivate;
+        this.bottomGravity = bottomGravity;
         return this;
     }
 
@@ -194,39 +194,39 @@ public class DialogListBean {
         return this;
     }
 
-    public int getTopPaddLeft() {
-        return topPaddLeft;
+    public int getTopPaddingLeft() {
+        return topPaddingLeft;
     }
 
-    public DialogListBean setTopPaddLeft(int topPaddLeft) {
-        this.topPaddLeft = topPaddLeft;
+    public DialogListBean setTopPaddingLeft(int topPaddingLeft) {
+        this.topPaddingLeft = topPaddingLeft;
         return this;
     }
 
-    public int getTopPaddTop() {
-        return topPaddTop;
+    public int getTopPaddingTop() {
+        return topPaddingTop;
     }
 
-    public DialogListBean setTopPaddTop(int topPaddTop) {
-        this.topPaddTop = topPaddTop;
+    public DialogListBean setTopPaddingTop(int topPaddingTop) {
+        this.topPaddingTop = topPaddingTop;
         return this;
     }
 
-    public int getTopPaddRight() {
-        return topPaddRight;
+    public int getTopPaddingRight() {
+        return topPaddingRight;
     }
 
-    public DialogListBean setTopPaddRight(int topPaddRight) {
-        this.topPaddRight = topPaddRight;
+    public DialogListBean setTopPaddingRight(int topPaddingRight) {
+        this.topPaddingRight = topPaddingRight;
         return this;
     }
 
-    public int getTopPaddBottom() {
-        return topPaddBottom;
+    public int getTopPaddingBottom() {
+        return topPaddingBottom;
     }
 
-    public DialogListBean setTopPaddBottom(int topPaddBottom) {
-        this.topPaddBottom = topPaddBottom;
+    public DialogListBean setTopPaddingBottom(int topPaddingBottom) {
+        this.topPaddingBottom = topPaddingBottom;
         return this;
     }
 
@@ -257,48 +257,48 @@ public class DialogListBean {
         return this;
     }
 
-    public int getBottomGrivate() {
-        return bottomGrivate;
+    public int getBottomGravity() {
+        return bottomGravity;
     }
 
-    public DialogListBean setBottomGrivate(int bottomGrivate) {
-        this.bottomGrivate = bottomGrivate;
+    public DialogListBean setBottomGravity(int bottomGravity) {
+        this.bottomGravity = bottomGravity;
         return this;
     }
 
-    public int getBottomPaddLeft() {
-        return bottomPaddLeft;
+    public int getBottomPaddingLeft() {
+        return bottomPaddingLeft;
     }
 
-    public DialogListBean setBottomPaddLeft(int bottomPaddLeft) {
-        this.bottomPaddLeft = bottomPaddLeft;
+    public DialogListBean setBottomPaddingLeft(int bottomPaddingLeft) {
+        this.bottomPaddingLeft = bottomPaddingLeft;
         return this;
     }
 
-    public int getBottomPaddTop() {
-        return bottomPaddTop;
+    public int getBottomPaddingTop() {
+        return bottomPaddingTop;
     }
 
-    public DialogListBean setBottomPaddTop(int bottomPaddTop) {
-        this.bottomPaddTop = bottomPaddTop;
+    public DialogListBean setBottomPaddingTop(int bottomPaddingTop) {
+        this.bottomPaddingTop = bottomPaddingTop;
         return this;
     }
 
-    public int getBottomPaddRight() {
-        return bottomPaddRight;
+    public int getBottomPaddingRight() {
+        return bottomPaddingRight;
     }
 
-    public DialogListBean setBottomPaddRight(int bottomPaddRight) {
-        this.bottomPaddRight = bottomPaddRight;
+    public DialogListBean setBottomPaddingRight(int bottomPaddingRight) {
+        this.bottomPaddingRight = bottomPaddingRight;
         return this;
     }
 
-    public int getBottomPaddBottom() {
-        return bottomPaddBottom;
+    public int getBottomPaddingBottom() {
+        return bottomPaddingBottom;
     }
 
-    public DialogListBean setBottomPaddBottom(int bottomPaddBottom) {
-        this.bottomPaddBottom = bottomPaddBottom;
+    public DialogListBean setBottomPaddingBottom(int bottomPaddingBottom) {
+        this.bottomPaddingBottom = bottomPaddingBottom;
         return this;
     }
 
@@ -320,12 +320,12 @@ public class DialogListBean {
         return this;
     }
 
-    public int getImageGrivate() {
-        return imageGrivate;
+    public int getImageGravity() {
+        return imageGravity;
     }
 
-    public DialogListBean setImageGrivate(int imageGrivate) {
-        this.imageGrivate = imageGrivate;
+    public DialogListBean setImageGravity(int imageGravity) {
+        this.imageGravity = imageGravity;
         return this;
     }
 
@@ -347,59 +347,59 @@ public class DialogListBean {
         return this;
     }
 
-    public int getImgPaddLeft() {
-        return imgPaddLeft;
+    public int getImgPaddingLeft() {
+        return imgPaddingLeft;
     }
 
-    public DialogListBean setImgPaddLeft(int imgPaddLeft) {
-        this.imgPaddLeft = imgPaddLeft;
+    public DialogListBean setImgPaddingLeft(int imgPaddingLeft) {
+        this.imgPaddingLeft = imgPaddingLeft;
         return this;
     }
 
-    public int getImgPaddTop() {
-        return imgPaddTop;
+    public int getImgPaddingTop() {
+        return imgPaddingTop;
     }
 
-    public DialogListBean setImgPaddTop(int imgPaddTop) {
-        this.imgPaddTop = imgPaddTop;
+    public DialogListBean setImgPaddingTop(int imgPaddingTop) {
+        this.imgPaddingTop = imgPaddingTop;
         return this;
     }
 
-    public int getImgPaddRight() {
-        return imgPaddRight;
+    public int getImgPaddingRight() {
+        return imgPaddingRight;
     }
 
-    public DialogListBean setImgPaddRight(int imgPaddRight) {
-        this.imgPaddRight = imgPaddRight;
+    public DialogListBean setImgPaddingRight(int imgPaddingRight) {
+        this.imgPaddingRight = imgPaddingRight;
         return this;
     }
 
-    public int getImgPaddBottom() {
-        return imgPaddBottom;
+    public int getImgPaddingBottom() {
+        return imgPaddingBottom;
     }
 
-    public DialogListBean setImgPaddBottom(int imgPaddBottom) {
-        this.imgPaddBottom = imgPaddBottom;
+    public DialogListBean setImgPaddingBottom(int imgPaddingBottom) {
+        this.imgPaddingBottom = imgPaddingBottom;
         return this;
     }
 
-    public DialogListBean setImgPaddTB(int imgPaddTop, int imgPaddBottom) {
-        this.imgPaddTop = imgPaddTop;
-        this.imgPaddBottom = imgPaddBottom;
+    public DialogListBean setImgPaddingTB(int imgPaddingTop, int imgPaddingBottom) {
+        this.imgPaddingTop = imgPaddingTop;
+        this.imgPaddingBottom = imgPaddingBottom;
         return this;
     }
 
-    public DialogListBean setImgPaddLR(int imgPaddLeft, int imgPaddRight) {
-        this.imgPaddLeft = imgPaddLeft;
-        this.imgPaddRight = imgPaddRight;
+    public DialogListBean setImgPaddingLR(int imgPaddingLeft, int imgPaddingRight) {
+        this.imgPaddingLeft = imgPaddingLeft;
+        this.imgPaddingRight = imgPaddingRight;
         return this;
     }
 
-    public DialogListBean setImgPadd(int imgPaddLeft, int imgPaddTop, int imgPaddRight, int imgPaddBottom) {
-        this.imgPaddLeft = imgPaddLeft;
-        this.imgPaddTop = imgPaddTop;
-        this.imgPaddRight = imgPaddRight;
-        this.imgPaddBottom = imgPaddBottom;
+    public DialogListBean setImgPadding(int imgPaddingLeft, int imgPaddingTop, int imgPaddingRight, int imgPaddingBottom) {
+        this.imgPaddingLeft = imgPaddingLeft;
+        this.imgPaddingTop = imgPaddingTop;
+        this.imgPaddingRight = imgPaddingRight;
+        this.imgPaddingBottom = imgPaddingBottom;
         return this;
     }
 }
