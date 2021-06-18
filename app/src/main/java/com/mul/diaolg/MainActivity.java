@@ -17,6 +17,7 @@ import com.mul.dialog.constant.DialogStyleEnum;
 import com.mul.dialog.dialog.MulFragmentDialog;
 import com.mul.dialog.bean.DialogListBean;
 import com.mul.dialog.proxy.DialogProxy;
+import com.mul.diaolg.utils.DensityUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -132,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                         .with(this)
                         .setDialogStyleEnum(DialogStyleEnum.recy.getCode())
                         .setColumns(4)
+//                        .setHeight(DensityUtils.dip2px(this, 57))
                         .setDialogPositionEnum(DialogPositionEnum.bottom.getCode())
                         .setRecyclerViewBg(android.R.color.white)
                         .setCancel("取消", 16, R.color.color_323232, true)

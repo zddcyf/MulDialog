@@ -58,7 +58,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogHold
             view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
             createCancelView(view);
         } else {
-            view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, ScreenUtils.px(mDialogConfigBean.getHeight() == 0 ? RecyclerView.LayoutParams.WRAP_CONTENT : mDialogConfigBean.getHeight())));
+            view.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, mDialogConfigBean.getHeight() == 0 ? RecyclerView.LayoutParams.WRAP_CONTENT : ScreenUtils.px(mDialogConfigBean.getHeight())));
             createView(view);
         }
         return new DialogHolder(view, viewType);
